@@ -1,0 +1,28 @@
+@import "./scss";
+
+.container {
+  max-width: 1240px;
+  padding: 0 map-get($spacers, 5);
+  margin: 0 auto;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.h-inherit {
+  height: inherit;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.custom-scroll {
+  overflow-y: scroll;
+  height: inherit;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}

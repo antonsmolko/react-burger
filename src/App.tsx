@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './app.scss';
+import AppHeader from "./components/app-header";
+import BurgerIngredients from "./components/burger-ingredients";
+import BurgerConstructor from "./components/burger-constructor";
+import Main from "./components/main";
+
+import itemsData from "./utils/data.json"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AppHeader />
+      <Main>
+        <BurgerIngredients items={itemsData} />
+        <BurgerConstructor items={itemsData} price={610} />
+      </Main>
+    </>
   );
 }
 
