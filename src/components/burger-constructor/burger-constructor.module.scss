@@ -1,0 +1,26 @@
+@import "../../scss/index";
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: map-get($spacers, 4);
+  padding-right: map-get($spacers, 1);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: map-get($spacers, 10);
+  padding-right: map-get($spacers, 4);
+}
+
+.price {
+  display: flex;
+  gap: map-get($spacers, 2);
+
+  > svg {
+    width: 36px;
+    height: 36px;
+  }
+}
