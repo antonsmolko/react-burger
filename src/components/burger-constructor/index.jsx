@@ -25,9 +25,11 @@ const BurgerConstructor = ({ items, price = 0 }) => {
           <span className="text text_type_digits-medium">{price}</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="large">
-          Оформить заказ
-        </Button>
+        <form>
+          <Button htmlType="submit" type="primary" size="large">
+            Оформить заказ
+          </Button>
+        </form>
       </footer>
     </section>
   );

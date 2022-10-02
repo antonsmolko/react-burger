@@ -23,10 +23,10 @@ const NavItem = ({ icon, label, isActive = false }) => {
   const iconType = isActive ? 'primary' : 'secondary';
 
   return (
-    <div className={styles}>
+    <a href="#" className={styles}>
       <Icon type={iconType} />
       <span className="text text_type_main-default ml-2">{label}</span>
-    </div>
+    </a>
   );
 };
 
