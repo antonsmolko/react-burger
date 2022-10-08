@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import useMount from './hooks/useMount';
+import useMount from '../../hooks/modals/useMount';
 import ModalLayout from './modal-layout';
 import { modalPropTypes } from '../../prop-types';
 

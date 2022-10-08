@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 
-import { ANIMATION_TIME } from '../../config';
+import { MODAL_ANIMATION_TIME } from '../../../../config';
 
 import styles from './styles.module.scss';
 import animationStyles from './animation.module.scss';
@@ -14,7 +14,7 @@ const ModalOverlay = ({ onClose, animationIn = false }) => {
     <CSSTransition
       in={animationIn}
       nodeRef={backDropRef}
-      timeout={ANIMATION_TIME}
+      timeout={MODAL_ANIMATION_TIME}
       mountOnEnter
       unmountOnExit
       classNames={animationStyles}

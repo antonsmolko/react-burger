@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ANIMATION_TIME } from '../config';
+import { MODAL_ANIMATION_TIME } from '../../config';
 
 const useMount = ({ isOpen }) => {
   const [mounted, setMounted] = useState(false);
@@ -10,7 +10,7 @@ const useMount = ({ isOpen }) => {
     } else if (!isOpen && mounted) {
       setTimeout(() => {
         setMounted(false);
-      }, ANIMATION_TIME);
+      }, MODAL_ANIMATION_TIME);
     }
   }, [isOpen]);
 

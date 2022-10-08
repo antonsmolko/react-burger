@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 
 import Item from './item';
 import Footer from './footer';
-import { useCheckout, useConstructorItems } from '../../hooks';
+import { useCheckout } from '../../hooks';
+import { getConstructorItems } from '../../utils';
 import styles from './styles.module.scss';
 import { constructorItemsPropTypes } from '../../prop-types';
 import OrderDetails from '../order-details';
 import Modal from '../modal';
 
 const BurgerConstructor = ({ items, price = 0 }) => {
-  const { first, rest, last } = useConstructorItems(items);
+  const { first, rest, last } = getConstructorItems(items);
   const { isOpen, submit, close, unMount, payload } = useCheckout({});
 
   const handleCheckout = async () => {

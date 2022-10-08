@@ -4,14 +4,20 @@ import BurgerIngredients from '../burger-ingredients';
 import BurgerConstructor from '../burger-constructor';
 import Main from '../main';
 
-import { API_INGREDIENTS_URL } from '../config';
+import { API_INGREDIENTS_URL } from '../../config';
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
     fetch(API_INGREDIENTS_URL)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Ошибка запроса!');
+        }
+
+        return response.json();
+      })
       .then(({ data }) => {
         setIngredients(data);
       })

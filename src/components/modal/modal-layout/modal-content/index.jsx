@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import ModalHeader from './modal-header';
 
-import { ANIMATION_TIME } from '../../config';
+import { MODAL_ANIMATION_TIME } from '../../../../config';
 
 import contentStyles from './styles.module.scss';
 import animationStyles from './animation.module.scss';
@@ -16,7 +16,7 @@ const ModalContent = ({ animationIn, title, onClose, children }) => {
     <CSSTransition
       in={animationIn}
       nodeRef={contentRef}
-      timeout={ANIMATION_TIME}
+      timeout={MODAL_ANIMATION_TIME}
       mountOnEnter
       unmountOnExit
       classNames={animationStyles}
