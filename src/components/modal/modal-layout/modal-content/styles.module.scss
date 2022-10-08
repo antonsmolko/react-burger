@@ -1,0 +1,24 @@
+@import '../../../../scss';
+
+.content {
+  position: relative;
+  width: 720px;
+  max-width: calc(100vw - map-get($spacers, 1));
+  max-height: calc(100vh - map-get($spacers, 1));
+  color: var(--text-primary-color);
+  background: var(--background);
+  border-radius: 40px;
+  box-sizing: border-box;
+  border: 1px solid rgba(76, 76, 255, 0.2);
+  box-shadow: 0 24px 32px rgba(0, 0, 0, 0.04),
+              0 16px 24px rgba(0, 0, 0, 0.04),
+              0 4px 8px rgba(0, 0, 0, 0.04),
+              0 0 1px rgba(0, 0, 0, 0.04);
+  margin: auto;
+  z-index: 3;
+}
+
+.container {
+  max-width: 520px;
+  margin: 0 auto;
+}
