@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import TypeSection from './type-section';
-import burgerIngredientsStyles from './burger-ingredients.module.scss';
+import styles from './styles.module.scss';
 import { constructorItemsPropTypes } from '../../prop-types';
+import IngredientsProvider from '../../providers/IngredientsProvider';
 
 const genItemsMap = (items) => items.reduce((acc, item) => ({ ...acc, [item.type]: [...acc[item.type], item] }), {
   bun: [],
@@ -16,8 +17,8 @@ const typesMap = {
   main: 'Начинки'
 };
 
-const renderItems = (items) => Object.entries(typesMap).map(([key, title]) => (
-  <TypeSection title={title} items={items[key]} key={key} />
+const renderTypeSections = (items) => Object.entries(typesMap).map(([key, title]) => (
+  <TypeSection type={key} title={title} items={items[key]} key={key} />
 ));
 
 const BurgerIngredients = ({ items }) => {
@@ -26,26 +27,28 @@ const BurgerIngredients = ({ items }) => {
   const itemsMap = genItemsMap(items);
 
   return (
-    <section className="pt-10">
-      <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
-      <div className="d-flex">
-        <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
-          Булки
-        </Tab>
-        <Tab value="sauces" active={current === 'sauces'} onClick={setCurrent}>
-          Соусы
-        </Tab>
-        <Tab value="main" active={current === 'main'} onClick={setCurrent}>
-          Начинки
-        </Tab>
-      </div>
-
-      <div className={burgerIngredientsStyles.items}>
-        <div className="custom-scroll">
-          {renderItems(itemsMap)}
+    <IngredientsProvider>
+      <section className="pt-10">
+        <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
+        <div className="d-flex">
+          <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
+            <a href="#bun">Булки</a>
+          </Tab>
+          <Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
+            <a href="#sauce">Соусы</a>
+          </Tab>
+          <Tab value="main" active={current === 'main'} onClick={setCurrent}>
+            <a href="#main">Начинки</a>
+          </Tab>
         </div>
-      </div>
-    </section>
+
+        <div className={styles.items}>
+          <div className="custom-scroll">
+            {renderTypeSections(itemsMap)}
+          </div>
+        </div>
+      </section>
+    </IngredientsProvider>
   );
 };
 

@@ -1,11 +1,4 @@
-@import "../../scss/index";
-
-.items {
-  display: flex;
-  flex-direction: column;
-  gap: map-get($spacers, 4);
-  padding-right: map-get($spacers, 1);
-}
+@import "../../../scss/index";
 
 .footer {
   display: flex;

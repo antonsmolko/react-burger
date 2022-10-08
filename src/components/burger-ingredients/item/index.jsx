@@ -1,21 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import itemStyles from './item.module.scss';
+import styles from './styles.module.scss';
 import { constructorItemPropTypes } from '../../../prop-types';
+import { useIngredients } from '../../../hooks';
 
 const Item = ({ item, count = 0 }) => {
+  const { modalOpen } = useIngredients();
+
+  const handleClick = () => {
+    modalOpen(item);
+  };
+
   return (
-    <div className={itemStyles.item}>
+    <div className={styles.item} onClick={handleClick}>
       {count > 0 && <Counter count={count} size="default" />}
-      <div className={`${itemStyles.image} pl-4 pr-4 mb-1`}>
+      <div className={`${styles.image} pl-4 pr-4 mb-1`}>
         <img src={item.image} alt={item.name}/>
       </div>
-      <div className={`${itemStyles.price} mb-1`}>
+      <div className={`${styles.price} mb-1`}>
         <span className="text text_type_digits-default pr-2">{item.price}</span>
         <CurrencyIcon type="primary" />
       </div>
-      <p className={`${itemStyles.name} text text_type_main-default`}>{item.name}</p>
+      <p className={`${styles.name} text text_type_main-default`}>{item.name}</p>
     </div>
   );
 };

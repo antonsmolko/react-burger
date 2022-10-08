@@ -1,14 +1,14 @@
 import React from 'react';
 import Item from '../item';
-import typeSectionStyles from './type-section.module.scss';
+import styles from './styles.module.scss';
 import { constructorItemsPropTypes } from '../../../prop-types';
 import PropTypes from 'prop-types';
 
-const TypeSection = ({ title, items }) => {
+const TypeSection = ({ type, title, items }) => {
   return (
-    <section className="pt-10">
+    <section id={type} className="pt-10">
       <span className="text text_type_main-medium">{title}</span>
-      <div className={typeSectionStyles.items}>
+      <div className={styles.items}>
         {items.map((item) => <Item item={item} count={1} key={item._id} />)}
       </div>
     </section>
@@ -16,6 +16,7 @@ const TypeSection = ({ title, items }) => {
 };
 
 TypeSection.propTypes = {
+  type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   items: constructorItemsPropTypes
 };

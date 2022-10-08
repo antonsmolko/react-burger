@@ -1,17 +1,17 @@
 import React from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import itemStyle from './item.module.scss';
+import styles from './styles.module.scss';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { constructorItemPropTypes } from '../../../prop-types';
 
 const Item = ({ item, isLocked = false, type = null }) => {
-  const styles = cn([itemStyle.item, { 'mr-4': isLocked }]);
+  const itemStyles = cn([styles.item, { 'mr-4': isLocked }]);
 
   return (
-    <div className={styles}>
+    <div className={itemStyles}>
       {!isLocked &&
-        <div className={itemStyle.drag}>
+        <div className={styles.drag}>
           <DragIcon type="primary" />
         </div>
       }
