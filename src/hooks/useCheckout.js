@@ -1,30 +1,36 @@
 import { useContentModal } from './modals/useContentModal';
-// import { API_CHECKOUT_URL } from '../components/config';
+import { API_ORDERS_URL } from '../config';
+import { useConstructor } from './useConstructor';
 
-export const useCheckout = ({ details }) => {
+export const useCheckout = () => {
   const { isOpen, open, close, payload, unMount } = useContentModal({});
+  const { ingredientIds, dispatchIngredients } = useConstructor();
 
-  const submit = async () => {
-    // @TODO: отправляем детали заказа на сервер, получаем ответ, открываем модальное окно
-    // const response = await fetch(API_CHECKOUT_URL, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(details)
-    // });
-    //
-    // const payload = response.json();
+  const submit = () => {
+    fetch(API_ORDERS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ingredients: ingredientIds })
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Ошибка запроса!');
+        }
 
-    // @TODO: временно хардкодим
-    open({ orderNumber: '034536' });
+        return response.json();
+      })
+      .then(({ order }) => {
+        open({ orderNumber: order.number });
+        dispatchIngredients({ type: 'reset' });
+      })
+      .catch(console.log);
   };
-
-
 
   return {
     submit,
-    isOpen,
-    close,
-    payload,
-    unMount
+    modalIsOpen: isOpen,
+    modalClose: close,
+    modalPayload: payload,
+    modalUnMount: unMount
   };
 };

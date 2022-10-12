@@ -1,1 +1,1 @@
-export { getConstructorItems } from './get-constructor-items';
+export { normalizeItems } from './normalize-items';

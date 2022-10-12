@@ -1,15 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './styles.module.scss';
 import { constructorItemPropTypes } from '../../../prop-types';
-import { useIngredients } from '../../../hooks';
+import { useIngredients, useConstructor } from '../../../hooks';
 
-const Item = ({ item, count = 0 }) => {
+const Item = ({ item }) => {
   const { modalOpen } = useIngredients();
+  const { dispatchIngredients, countMap } = useConstructor();
+
+  const count = countMap[item._id] || 0;
 
   const handleClick = () => {
     modalOpen(item);
+    dispatchIngredients({ item, type: 'add' });
   };
 
   return (
@@ -28,8 +31,7 @@ const Item = ({ item, count = 0 }) => {
 };
 
 Item.propTypes = {
-  item: constructorItemPropTypes,
-  count: PropTypes.number
+  item: constructorItemPropTypes
 };
 
 export default Item;

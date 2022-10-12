@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AppHeader from '../app-header';
 import BurgerIngredients from '../burger-ingredients';
 import BurgerConstructor from '../burger-constructor';
+import ConstructorProvider from '../../providers/ConstructorProvider';
 import Main from '../main';
 
 import { API_INGREDIENTS_URL } from '../../config';
@@ -21,17 +22,17 @@ function App() {
       .then(({ data }) => {
         setIngredients(data);
       })
-      .catch((error) => {
-        // наверное здесь будет реализован вывод ошибки в snackbar
-      });
+      .catch(console.log);
   }, []);
 
   return (
     <>
       <AppHeader />
       <Main>
-        <BurgerIngredients items={ingredients} />
-        <BurgerConstructor items={ingredients} price={610} />
+        <ConstructorProvider items={ingredients}>
+          <BurgerIngredients items={ingredients} />
+          <BurgerConstructor />
+        </ConstructorProvider>
       </Main>
     </>
   );

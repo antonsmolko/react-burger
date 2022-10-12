@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 const IngredientDetails = ({ item }) => (
   <>
     <div className={styles.image}>
-      <img src={item.image} alt={item.name} />
+      <img src={item.image_large} alt={item.name} />
     </div>
     <p className="text text_type_main-medium text-center mt-4">{item.name}</p>
     <div className={`${styles.nutrition} mt-8`}>
