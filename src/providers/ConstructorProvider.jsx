@@ -1,5 +1,5 @@
-import React, { useReducer, useEffect, useState } from 'react';
-import { ConstructorContext } from '../contexts';
+import React, { useReducer, useEffect, useState, useMemo } from 'react';
+import { ConstructorContext } from '../services';
 import { normalizeItems } from '../utils';
 
 const ingredientsInitialState = { bun: null, rest: [] };
@@ -31,18 +31,21 @@ const ingredientsReducer = (state, { item, type, removeIndex = null }) => {
 
 const ConstructorProvider = ({ items, children }) => {
   const [normalizedItems, setNormalizedItems] = useState({});
- 	const [ingredients, dispatchIngredients] = useReducer(ingredientsReducer, ingredientsInitialState, undefined);
+ 	const [ingredients, dispatchIngredients] = useReducer(ingredientsReducer, ingredientsInitialState);
 
   const { bun, rest } = ingredients;
 
   const bunIngredient = normalizedItems[bun];
   const restIngredients = rest.map((id) => normalizedItems[id]);
   const ingredientIds = [bun, bun, ...rest].filter(Boolean);
-  const countMap = ingredientIds.reduce((acc, id) => (
-    { ...acc, [id]: acc[id] ? acc[id] + 1 : 1 }
-  ), {});
-  const price = ingredientIds.reduce((acc, id) => acc + normalizedItems[id].price, 0);
 
+  const countMap = useMemo(() => (
+    ingredientIds.reduce((acc, id) => ({ ...acc, [id]: acc[id] ? acc[id] + 1 : 1 }), {})
+  ), [ingredientIds]);
+
+  const price = useMemo(() => (
+    ingredientIds.reduce((acc, id) => acc + normalizedItems[id].price, 0)
+  ), [ingredientIds]);
 
   useEffect(() => {
     setNormalizedItems(normalizeItems(items));

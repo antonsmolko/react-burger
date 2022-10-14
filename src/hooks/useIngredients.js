@@ -1,4 +1,4 @@
 import { useContext } from 'react';
-import { IngredientsContext } from '../contexts';
+import { IngredientsContext } from '../services';
 
 export const useIngredients = () => useContext(IngredientsContext);

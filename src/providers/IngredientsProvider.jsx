@@ -1,5 +1,5 @@
 import React from 'react';
-import { IngredientsContext } from '../contexts';
+import { IngredientsContext } from '../services';
 import { useContentModal } from '../hooks';
 import Modal from '../components/modal';
 import IngredientDetails from '../components/ingredient-details';

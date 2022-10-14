@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import TypeSection from './type-section';
 import styles from './styles.module.scss';
@@ -24,7 +24,7 @@ const renderTypeSections = (items) => Object.entries(typesMap).map(([key, title]
 const BurgerIngredients = ({ items }) => {
   const [current, setCurrent] = useState('bun');
 
-  const itemsMap = genItemsMap(items);
+  const itemsMap = useMemo(() => genItemsMap(items), [items]);
 
   return (
     <IngredientsProvider>
