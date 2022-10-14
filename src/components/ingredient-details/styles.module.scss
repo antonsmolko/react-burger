@@ -1,0 +1,17 @@
+@import "../../scss/index";
+
+.image {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 map-get($spacers, 5);
+}
+
+.nutrition {
+  display: flex;
+  gap: map-get($spacers, 5);
+
+  > * {
+    flex-basis: 112px;
+    flex-grow: 1;
+  }
+}

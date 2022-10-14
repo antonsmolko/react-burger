@@ -1,0 +1,9 @@
+@import "../../../scss/index";
+
+.items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: map-get($spacers, 6);
+  row-gap: map-get($spacers, 8);
+  padding: map-get($spacers, 6) map-get($spacers, 1) 0 map-get($spacers, 4);
+}
