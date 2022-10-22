@@ -21,6 +21,10 @@ img {
   display: flex;
 }
 
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
 .h-inherit {
   height: inherit;
 }

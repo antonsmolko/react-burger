@@ -1,37 +1,52 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useDrag } from 'react-dnd';
+import PropTypes from 'prop-types';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './styles.module.scss';
 import { constructorItemPropTypes } from '../../../prop-types';
-import { useIngredients, useConstructor } from '../../../hooks';
+import { useIngredients } from '../../../hooks';
+import {
+  SET_CURRENT_INGREDIENT
+} from '../../../services/actions';
 
-const Item = ({ item }) => {
+const Item = ({ item, qty = 0 }) => {
+  const { name, price, image } = item;
+
+  const dispatch = useDispatch();
   const { modalOpen } = useIngredients();
-  const { dispatchIngredients, countMap } = useConstructor();
-
-  const count = countMap[item._id] || 0;
 
   const handleClick = () => {
-    modalOpen(item);
-    dispatchIngredients({ item, type: 'add' });
+    dispatch({ type: SET_CURRENT_INGREDIENT, payload: item });
+    modalOpen();
   };
 
+  const [{ opacity }, dragRef] = useDrag({
+    type: 'ingredient',
+    item: { ...item },
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? 0.5 : 1
+    })
+  });
+
   return (
-    <div className={styles.item} onClick={handleClick}>
-      {count > 0 && <Counter count={count} size="default" />}
+    <div ref={dragRef} className={styles.item} onClick={handleClick} style={{ opacity }}>
+      {qty > 0 && <Counter count={qty} size="default" />}
       <div className={`${styles.image} pl-4 pr-4 mb-1`}>
-        <img src={item.image} alt={item.name}/>
+        <img src={image} alt={name}/>
       </div>
       <div className={`${styles.price} mb-1`}>
-        <span className="text text_type_digits-default pr-2">{item.price}</span>
+        <span className="text text_type_digits-default pr-2">{price}</span>
         <CurrencyIcon type="primary" />
       </div>
-      <p className={`${styles.name} text text_type_main-default`}>{item.name}</p>
+      <p className={`${styles.name} text text_type_main-default`}>{name}</p>
     </div>
   );
 };
 
 Item.propTypes = {
-  item: constructorItemPropTypes
+  item: constructorItemPropTypes,
+  qty: PropTypes.number
 };
 
 export default Item;

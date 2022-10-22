@@ -1,17 +1,18 @@
 import React from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch } from 'react-redux';
 import styles from './styles.module.scss';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { constructorItemPropTypes } from '../../../prop-types';
-import { useConstructor } from '../../../hooks';
+import { REMOVE_CONSTRUCTOR_INGREDIENT } from '../../../services/actions';
 
 const Item = ({ item, index = null, isLocked = false, type = null }) => {
-  const itemStyles = cn([styles.item, { 'mr-4': isLocked }]);
-  const { dispatchIngredients } = useConstructor();
+  const dispatch = useDispatch();
+  const itemStyles = cn([styles.item, { 'pr-4': isLocked }]);
 
   const handleRemove = () => {
-    dispatchIngredients({ removeIndex: index, type: 'remove' });
+    dispatch({ type: REMOVE_CONSTRUCTOR_INGREDIENT, payload: index });
   };
 
   return (

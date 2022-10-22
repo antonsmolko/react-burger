@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
 
-const Footer = ({ onCheckout, price = 0 }) => {
+const Footer = ({ onCheckout, items }) => {
+  const { bun, rest } = items;
+  const [price, setPrice] = useState(0);
+
+  const getPrice = () => [bun, bun, ...rest].reduce((acc, item) => (
+    item ? acc + item.price : acc
+  ), 0);
+
+
   const handleClick = (event) => {
     event.preventDefault();
     onCheckout();
   };
+
+  useEffect(() => {
+    setPrice(getPrice());
+  }, [items]);
 
   return (
     <footer className={`${styles.footer} mt-10`}>
