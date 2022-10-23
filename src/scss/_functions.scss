@@ -1,0 +1,9 @@
+@use "sass:map";
+
+@function gen-spacers($spacer, $steps) {
+  $result: ();
+  @each $step in $steps {
+    $result: map.set($result, $step, $spacer * $step);
+  }
+  @return $result;
+}

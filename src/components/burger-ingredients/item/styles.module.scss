@@ -1,0 +1,22 @@
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.image {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.name {
+  min-height: 48px;
+}
+
+.price {
+  display: flex;
+}

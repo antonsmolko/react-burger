@@ -1,0 +1,32 @@
+@import "../../scss";
+
+.header {
+  height: $header-height;
+  box-sizing: border-box;
+  background-color: var(--background);
+  padding: map-get($spacers, 4) 0;
+}
+
+.nav {
+  display: flex;
+  gap: map-get($spacers, 2);
+  align-items: center;
+  margin-left: - map-get($spacers, 5);
+  margin-right: - map-get($spacers, 5);
+}
+
+.navSection {
+  display: flex;
+  gap: map-get($spacers, 2);
+  flex-grow: 1;
+  max-width: calc(50% - 290px / 2);
+}
+
+.navLeft {
+  composes: navSection;
+}
+
+.navRight {
+  composes: navSection;
+  justify-content: flex-end;
+}

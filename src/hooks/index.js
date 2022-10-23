@@ -1,0 +1,1 @@
+export { useConstructorIngredientsQtyMap } from './useConstructorIngredientsQtyMap';
