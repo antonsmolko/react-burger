@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 export const useConstructorIngredientsQtyMap = () => {
-  const { bun, rest } = useSelector((store) => store.constructorIngredients);
+  const { bun, rest } = useSelector((store) => store.burgerConstructor.items);
 
   const result = bun ? { [bun._id]: 2 } : {};
 

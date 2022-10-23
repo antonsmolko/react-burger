@@ -8,4 +8,9 @@ export const constructorItemPropTypes = PropTypes.shape({
   image_mobile: PropTypes.string.isRequired,
 }).isRequired;
 
+export const constructorItemsPropType = PropTypes.shape({
+  bun: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.object]),
+  rest: PropTypes.arrayOf(constructorItemPropTypes)
+}).isRequired;
+
 export const constructorItemsPropTypes = PropTypes.arrayOf(constructorItemPropTypes);

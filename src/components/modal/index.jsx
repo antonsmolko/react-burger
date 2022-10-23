@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import useMount from '../../hooks/modals/useMount';
 import ModalLayout from './modal-layout';
 import { modalPropTypes } from '../../prop-types';
 
 const modalRootElement = document.getElementById('modal-root');
 
-const Modal = ({ children, isOpen, onClose, unMount, title = null }) => {
-  const { mounted } = useMount({ isOpen });
-
+const Modal = ({ children, onClose, title = null }) => {
   const handleKeyDown = (event) => {
     if (event.key === 'Escape') {
       onClose();
@@ -19,18 +16,14 @@ const Modal = ({ children, isOpen, onClose, unMount, title = null }) => {
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
 
-    if (!mounted) {
-      unMount();
-    }
-
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [mounted]);
+  }, []);
 
   return (
-    mounted && createPortal(
-      <ModalLayout isOpen={isOpen} onClose={onClose} title={title}>
+    createPortal(
+      <ModalLayout onClose={onClose} title={title}>
         {children}
       </ModalLayout>,
       modalRootElement

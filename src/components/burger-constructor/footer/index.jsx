@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
+import { constructorItemsPropType } from '../../../prop-types';
 
 const Footer = ({ onCheckout, items }) => {
   const { bun, rest } = items;
@@ -28,7 +29,13 @@ const Footer = ({ onCheckout, items }) => {
         <CurrencyIcon type="primary" />
       </div>
       <form>
-        <Button htmlType="submit" type="primary" size="large" onClick={handleClick}>
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="large"
+          onClick={handleClick}
+          disabled={!Boolean(bun)}
+        >
 					Оформить заказ
         </Button>
       </form>
@@ -37,7 +44,7 @@ const Footer = ({ onCheckout, items }) => {
 };
 
 Footer.propTypes = {
-  price: PropTypes.number,
+  items: constructorItemsPropType,
   onCheckout: PropTypes.func.isRequired
 };
 

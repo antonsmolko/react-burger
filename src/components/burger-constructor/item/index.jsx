@@ -5,14 +5,14 @@ import styles from './styles.module.scss';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { constructorItemPropTypes } from '../../../prop-types';
-import { REMOVE_CONSTRUCTOR_INGREDIENT } from '../../../services/actions';
+import { removeConstructorIngredient } from '../../../services/actions/constructor';
 
 const Item = ({ item, index = null, isLocked = false, type = null }) => {
   const dispatch = useDispatch();
   const itemStyles = cn([styles.item, { 'pr-4': isLocked }]);
 
   const handleRemove = () => {
-    dispatch({ type: REMOVE_CONSTRUCTOR_INGREDIENT, payload: index });
+    dispatch(removeConstructorIngredient(index));
   };
 
   return (

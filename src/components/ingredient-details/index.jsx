@@ -19,7 +19,14 @@ const IngredientDetails = ({ item }) => (
 );
 
 IngredientDetails.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.shape({
+    name: PropTypes.string,
+    calories: PropTypes.number,
+    fat: PropTypes.number,
+    proteins: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    image_large: PropTypes.string,
+  })
 };
 
 export default IngredientDetails;

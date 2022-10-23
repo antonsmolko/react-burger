@@ -19,7 +19,7 @@ OrderDetails.propTypes = {
   orderNumber: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string
-  ])
+  ]).isRequired
 };
 
 export default OrderDetails;

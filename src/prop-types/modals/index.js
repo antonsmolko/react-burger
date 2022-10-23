@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types';
+import { childrenPropTypes } from '../common';
 
 export const modalContentPropTypes = {
   onClose: PropTypes.func.isRequired,
-  title: PropTypes.string
+  title: PropTypes.string,
+  children: childrenPropTypes
 };
 
 export const modalLayoutPropTypes = {
   ...modalContentPropTypes,
-  isOpen: PropTypes.bool
+  children: childrenPropTypes
 };
 
 export const modalPropTypes = {
   ...modalLayoutPropTypes,
-  unMount: PropTypes.func.isRequired
+  children: childrenPropTypes
 };

@@ -1,12 +1,10 @@
-import { useCallback } from 'react';
-import Item from '../item';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import Item from '../item';
 import styles from '../styles.module.scss';
-import React from 'react';
-import { UPDATE_CONSTRUCTOR_INGREDIENTS } from '../../../services/actions';
+import { updateConstructorIngredients } from '../../../services/actions/constructor';
 import DragItem from '../drag-item';
-import PropTypes from 'prop-types';
-import { constructorItemPropTypes } from '../../../prop-types';
+import { constructorItemsPropType } from '../../../prop-types';
 
 const ItemsList = ({ ingredients }) => {
   const { bun, rest } = ingredients;
@@ -19,10 +17,7 @@ const ItemsList = ({ ingredients }) => {
     items.splice(dragIndex, 1);
     items.splice(hoverIndex, 0, dragItem);
 
-    dispatch({
-      type: UPDATE_CONSTRUCTOR_INGREDIENTS,
-      payload: items,
-    });
+    dispatch(updateConstructorIngredients(items));
   }, [rest, dispatch]);
 
   return (
@@ -43,10 +38,7 @@ const ItemsList = ({ ingredients }) => {
 };
 
 ItemsList.prototype = {
-  ingredients: PropTypes.shape({
-    bun: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.object]),
-    rest: PropTypes.arrayOf(constructorItemPropTypes)
-  }).isRequired
+  ingredients: constructorItemsPropType
 };
 
 export default ItemsList;

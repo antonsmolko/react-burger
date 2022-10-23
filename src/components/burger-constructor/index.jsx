@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Footer from './footer';
-import { useModal } from '../../hooks';
 import OrderDetails from '../order-details';
 import Modal from '../modal';
-import { createOrder } from '../../services/reducers/rootReducer';
 import {
-  ADD_CONSTRUCTOR_INGREDIENT,
-  RESET_CONSTRUCTOR_INGREDIENTS,
-  RESET_CURRENT_ORDER
-} from '../../services/actions';
+  addConstructorIngredient,
+  resetConstructorIngredients
+} from '../../services/actions/constructor';
+import {
+  resetCurrentOrder,
+  createOrder
+} from '../../services/actions/order';
 import ItemsList from './items-list';
 import { useDrop } from 'react-dnd';
 import { nanoid } from 'nanoid';
@@ -19,30 +20,40 @@ import styles from './styles.module.scss';
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
-  const { isOpen, open, close } = useModal();
+  const [isModalOpen, setModalOpen] = useState(false);
 
-  const { ingredients, order, createOrderSuccess } = useSelector((store) => ({
-    ingredients: store.constructorIngredients,
-    order: store.currentOrder,
-    createOrderSuccess: store.createOrderSuccess
+  const {
+    ingredients,
+    order,
+    createOrderRequest,
+    createOrderFailed
+  } = useSelector((store) => ({
+    ingredients: store.burgerConstructor.items,
+    order: store.order.current,
+    createOrderFailed: store.order.createOrderFailed,
+    createOrderRequest: store.order.createOrderRequest
   }));
 
-  const submit = async () => {
+  const submit = () => {
     const { bun, rest } = ingredients;
     const ingredientIds = [bun, ...rest, bun].filter(Boolean).map(({ _id }) => _id);
-    await dispatch(createOrder(ingredientIds));
-    open();
-    dispatch({ type: RESET_CONSTRUCTOR_INGREDIENTS });
-  };
 
-  const handleUnMount = () => {
-    dispatch({ type: RESET_CURRENT_ORDER });
+    dispatch(createOrder(ingredientIds));
+    dispatch(resetConstructorIngredients());
   };
 
   useEffect(() => {
-    if (!createOrderSuccess) { return;}
-    open();
-  }, [createOrderSuccess]);
+    if (createOrderRequest || createOrderFailed || !order) {
+      return;
+    }
+
+    setModalOpen(true);
+  }, [createOrderRequest, order]);
+
+  const handleClose = () => {
+    setModalOpen(false);
+    dispatch(resetCurrentOrder());
+  };
 
   const [{ isHover }, dropTargetRef] = useDrop({
     accept: 'ingredient',
@@ -50,10 +61,7 @@ const BurgerConstructor = () => {
       isHover: monitor.isOver()
     }),
     drop(item) {
-      dispatch({
-        type: ADD_CONSTRUCTOR_INGREDIENT,
-        payload: { ...item, dragId: nanoid(), }
-      });
+      dispatch(addConstructorIngredient({ ...item, dragId: nanoid() }));
     }
   });
 
@@ -67,9 +75,11 @@ const BurgerConstructor = () => {
         <ItemsList ingredients={ingredients} />
         <Footer items={ingredients} onCheckout={submit}/>
       </section>
-      <Modal isOpen={isOpen} onClose={close} unMount={handleUnMount}>
-        <OrderDetails orderNumber={order.number} />
-      </Modal>
+      {isModalOpen && (
+        <Modal onClose={handleClose}>
+          <OrderDetails orderNumber={order.number} />
+        </Modal>
+      )}
     </>
   );
 };

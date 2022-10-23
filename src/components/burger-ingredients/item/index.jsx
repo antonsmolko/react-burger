@@ -5,20 +5,17 @@ import PropTypes from 'prop-types';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './styles.module.scss';
 import { constructorItemPropTypes } from '../../../prop-types';
-import { useIngredients } from '../../../hooks';
-import {
-  SET_CURRENT_INGREDIENT
-} from '../../../services/actions';
+import { setCurrentIngredient } from '../../../services/actions/ingredient-details';
+import { openModal } from '../../../services/actions/ingredient-details';
 
 const Item = ({ item, qty = 0 }) => {
   const { name, price, image } = item;
 
   const dispatch = useDispatch();
-  const { modalOpen } = useIngredients();
 
   const handleClick = () => {
-    dispatch({ type: SET_CURRENT_INGREDIENT, payload: item });
-    modalOpen();
+    dispatch(setCurrentIngredient(item));
+    dispatch(openModal());
   };
 
   const [{ opacity }, dragRef] = useDrag({
