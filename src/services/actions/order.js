@@ -5,10 +5,10 @@ export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS';
 export const CREATE_ORDER_FAILED = 'CREATE_ORDER_FAILED';
 export const RESET_CURRENT_ORDER = 'RESET_CURRENT_ORDER';
 
-export const createOrder = (payload) => async (dispatch) => {
+export const createOrder = (payload) => (dispatch) => {
   dispatch({ type: CREATE_ORDER_REQUEST });
 
-  await orderRequest(payload)
+  return orderRequest(payload)
     .then(({ order, success, message }) => {
       if (success) {
         dispatch({ type: CREATE_ORDER_SUCCESS, payload: order });

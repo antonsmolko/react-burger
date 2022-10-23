@@ -34,7 +34,7 @@ const Footer = ({ onCheckout, items }) => {
           type="primary"
           size="large"
           onClick={handleClick}
-          disabled={!Boolean(bun)}
+          disabled={!bun}
         >
 					Оформить заказ
         </Button>
