@@ -10,12 +10,12 @@ const AppHeader = () => {
       <div className="container">
         <nav className={appHeaderStyles.nav}>
           <div className={appHeaderStyles.navLeft}>
-            <NavItem icon="burger" label="Конструктор" isActive={true} />
-            <NavItem icon="list" label="Лента заказов" />
+            <NavItem icon="burger" label="Конструктор" to={'/'} />
+            <NavItem icon="list" label="Лента заказов" to={'/band'} />
           </div>
           <Logo />
           <div className={appHeaderStyles.navRight}>
-            <NavItem icon="profile" label="Личный кабинет" />
+            <NavItem icon="profile" label="Личный кабинет" to={'/profile'} />
           </div>
         </nav>
       </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Footer from './footer';
 import OrderDetails from '../order-details';
@@ -17,9 +18,12 @@ import { useDrop } from 'react-dnd';
 import { nanoid } from 'nanoid';
 import cn from 'classnames';
 import styles from './styles.module.scss';
+import { useAuth } from '../../hooks';
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loggedIn } = useAuth();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const {
@@ -35,6 +39,11 @@ const BurgerConstructor = () => {
   }));
 
   const submit = () => {
+    if (!loggedIn) {
+      navigate('/login', { state: { from: '/' } });
+      return;
+    }
+
     const { bun, rest } = ingredients;
     const ingredientIds = [bun, ...rest, bun].filter(Boolean).map(({ _id }) => _id);
 

@@ -9,7 +9,6 @@
 
 .nav {
   display: flex;
-  gap: map-get($spacers, 2);
   align-items: center;
   margin-left: - map-get($spacers, 5);
   margin-right: - map-get($spacers, 5);

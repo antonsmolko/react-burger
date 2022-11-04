@@ -1,14 +1,12 @@
 import React from 'react';
-import mainStyles from './main.module.scss';
+import styles from './main.module.scss';
 import { childrenPropTypes } from '../../prop-types';
 
 const Main = ({ children }) => {
   return (
-    <main className={mainStyles.main}>
+    <main className={styles.main}>
       <div className="container h-inherit">
-        <div className={mainStyles.content}>
-          {children}
-        </div>
+        {children}
       </div>
     </main>
   );

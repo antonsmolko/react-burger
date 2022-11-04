@@ -1,5 +1,9 @@
 @import "./scss";
 
+body, #root {
+  min-height: 100vh;
+}
+
 .container {
   max-width: 1240px;
   padding: 0 map-get($spacers, 5);
@@ -17,14 +21,38 @@ img {
   display: block;
 }
 
+#modal-root {
+  z-index: $modal-root-z-index;
+}
+
+/** Flex
+==================================================== */
 .d-flex {
   display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
 }
 
 .flex-grow-1 {
   flex-grow: 1;
 }
 
+.align-center {
+  align-items: center;
+}
+
+.justify-end {
+  justify-content: end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+/** Height
+==================================================== */
 .h-inherit {
   height: inherit;
 }
@@ -33,15 +61,8 @@ img {
   height: 100%;
 }
 
-.custom-scroll {
-  overflow-y: scroll;
-  height: inherit;
-}
-
-.overflow-y-hidden {
-  overflow-y: hidden;
-}
-
+/** Typography
+==================================================== */
 .text-center {
   text-align: center;
 }
@@ -50,6 +71,15 @@ img {
   white-space: nowrap;
 }
 
-#modal-root {
-  z-index: $modal-root-z-index;
+/** Overflow
+==================================================== */
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+/** Scroll
+==================================================== */
+.custom-scroll {
+  overflow-y: scroll;
+  height: inherit;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -10,8 +11,8 @@ const iconMap = {
   profile: ProfileIcon
 };
 
-const NavItem = ({ icon, label, isActive = false }) => {
-  const styles = cn([
+const NavItem = ({ icon, to, label }) => {
+  const styles = ({ isActive }) => cn([
     navItemStyles.navItem,
     'pl-5 pt-4 pb-4 pr-5',
     {
@@ -20,20 +21,24 @@ const NavItem = ({ icon, label, isActive = false }) => {
   ]);
 
   const Icon = iconMap[icon];
-  const iconType = isActive ? 'primary' : 'secondary';
+  const getIconType = (isActive) => (isActive  ? 'primary' : 'secondary');
 
   return (
-    <a href="#" className={styles}>
-      <Icon type={iconType} />
-      <span className="text text_type_main-default ml-2">{label}</span>
-    </a>
+    <NavLink to={to} className={styles} end>
+      {({ isActive }) => (
+        <>
+          <Icon type={getIconType(isActive)} />
+          <span className="text text_type_main-default ml-2">{label}</span>
+        </>
+      )}
+    </NavLink>
   );
 };
 
 NavItem.propTypes = {
   icon: PropTypes.oneOf(['burger', 'list', 'profile']).isRequired,
-  label: PropTypes.string.isRequired,
-  isActive: PropTypes.bool
+  to: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired
 };
 
 export default NavItem;

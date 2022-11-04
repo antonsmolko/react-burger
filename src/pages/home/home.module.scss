@@ -1,0 +1,15 @@
+@import '../../scss';
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  height: inherit;
+
+  > section {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    box-sizing: border-box;
+  }
+}
