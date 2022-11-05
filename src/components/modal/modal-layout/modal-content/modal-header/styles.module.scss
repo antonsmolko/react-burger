@@ -1,0 +1,12 @@
+@import '../../../../../scss/index';
+
+.header {
+  display: flex;
+  gap: map-get($spacers, 9);
+  min-height: 64px;
+}
+
+.close {
+  margin-left: auto;
+  cursor: pointer;
+}
