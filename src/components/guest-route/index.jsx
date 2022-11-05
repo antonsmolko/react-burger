@@ -12,7 +12,7 @@ const GuestRoute = ({ children }) => {
   );
 };
 
-GuestRoute.prototype = {
+GuestRoute.propType = {
   children: childrenPropTypes
 };
 

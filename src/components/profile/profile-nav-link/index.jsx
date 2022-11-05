@@ -19,7 +19,7 @@ const ProfileNavLink = ({ children, to, onClick }) => {
     : <div className={genClassName()} onClick={onClick}>{children}</div>;
 };
 
-ProfileNavLink.prototype = {
+ProfileNavLink.propType = {
   children: childrenPropTypes,
   to: PropTypes.string,
   onClick: PropTypes.func

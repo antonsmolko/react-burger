@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
 import { constructorItemsPropType } from '../../../prop-types';
 
-const Footer = ({ onCheckout, items }) => {
+const Footer = ({ onCheckout, items, loading = false }) => {
   const { bun, rest } = items;
   const [price, setPrice] = useState(0);
 
@@ -34,9 +34,9 @@ const Footer = ({ onCheckout, items }) => {
           type="primary"
           size="large"
           onClick={handleClick}
-          disabled={!bun}
+          disabled={!bun || loading}
         >
-					Оформить заказ
+          Оформить заказ
         </Button>
       </form>
     </footer>
@@ -45,7 +45,8 @@ const Footer = ({ onCheckout, items }) => {
 
 Footer.propTypes = {
   items: constructorItemsPropType,
-  onCheckout: PropTypes.func.isRequired
+  onCheckout: PropTypes.func.isRequired,
+  loading: PropTypes.bool
 };
 
 export default Footer;

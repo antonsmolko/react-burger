@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import Form from '../../components/auth/form';
 import { forgotPassword } from '../../services/actions/auth';
+import { useForm } from '../../hooks';
 
 export const ForgotPasswordPage = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
+  const { form, handleChange } = useForm({ email: '' });
 
   const submit = async () => {
-    dispatch(forgotPassword(email));
+    dispatch(forgotPassword(form));
   };
 
   return (
@@ -19,9 +20,9 @@ export const ForgotPasswordPage = () => {
         <Input
           name={'email'}
           placeholder={'E-mail'}
-          value={email}
+          value={form.email}
           type={'email'}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleChange}
         />
       </Form>
 

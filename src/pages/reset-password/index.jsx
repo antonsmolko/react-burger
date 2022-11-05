@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation, Navigate } from 'react-router-dom';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import Form from '../../components/auth/form';
 import { resetPassword } from '../../services/actions/auth';
 import { getQueryParams } from '../../services/utils';
+import { useForm } from '../../hooks';
 
 export const ResetPasswordPage = () => {
   const { search } = useLocation();
@@ -16,18 +17,13 @@ export const ResetPasswordPage = () => {
 
   const dispatch = useDispatch();
 
-  const [state, setState] = useState({
+  const { form, handleChange } = useForm({
     password: '',
-    token: '',
+    token: ''
   });
 
-  const handleInputChange = (event) => {
-    const { value, name } = event.target;
-    setState({ ...state, [name]: value });
-  };
-
   const submit = async () => {
-    dispatch(resetPassword(state));
+    dispatch(resetPassword(form));
   };
 
   return (
@@ -36,15 +32,15 @@ export const ResetPasswordPage = () => {
         <PasswordInput
           name={'password'}
           placeholder={'Пароль'}
-          value={state.password}
-          onChange={handleInputChange}
+          value={form.password}
+          onChange={handleChange}
         />
         <Input
           name={'token'}
           placeholder={'Введите код из письма'}
-          value={state.token}
+          value={form.token}
           type={'text'}
-          onChange={handleInputChange}
+          onChange={handleChange}
         />
       </Form>
 

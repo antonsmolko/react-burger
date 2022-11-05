@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import Form from '../../components/auth/form';
 import { register } from '../../services/actions/auth';
+import { useForm } from '../../hooks';
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
-  const [state, setState] = useState({
+  const { form, handleChange } = useForm({
     name: '',
     email: '',
     password: ''
   });
 
-  const handleInputChange = (event) => {
-    const { value, name } = event.target;
-    setState({ ...state, [name]: value });
-  };
-
   const submit = async () => {
-    dispatch(register(state));
+    dispatch(register(form));
   };
 
   return (
@@ -28,22 +24,22 @@ export const RegisterPage = () => {
         <Input
           name={'name'}
           placeholder={'Имя'}
-          value={state.name}
+          value={form.name}
           type={'text'}
-          onChange={handleInputChange}
+          onChange={handleChange}
         />
         <Input
           name={'email'}
           placeholder={'E-mail'}
-          value={state.email}
+          value={form.email}
           type={'email'}
-          onChange={handleInputChange}
+          onChange={handleChange}
         />
         <PasswordInput
           name={'password'}
           placeholder={'Пароль'}
-          value={state.password}
-          onChange={handleInputChange}
+          value={form.password}
+          onChange={handleChange}
         />
       </Form>
 

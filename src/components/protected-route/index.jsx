@@ -14,7 +14,7 @@ const ProtectedRoute = ({ children }) => {
   );
 };
 
-ProtectedRoute.prototype = {
+ProtectedRoute.propType = {
   children: childrenPropTypes
 };
 

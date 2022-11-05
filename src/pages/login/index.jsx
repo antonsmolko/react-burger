@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import Form from '../../components/auth/form';
 import { login } from '../../services/actions/auth';
+import { useForm } from '../../hooks';
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
 
-  const [state, setState] = useState({
+  const { form, handleChange } = useForm({
     email: '',
     password: ''
   });
 
-  const handleInputChange = (event) => {
-    const { value, name } = event.target;
-    setState({ ...state, [name]: value });
-  };
-
   const submit = () => {
-    dispatch(login(state));
+    dispatch(login(form));
   };
 
   return (
@@ -28,15 +24,15 @@ export const LoginPage = () => {
         <Input
           name={'email'}
           placeholder={'E-mail'}
-          value={state.email}
+          value={form.email}
           type={'email'}
-          onChange={handleInputChange}
+          onChange={handleChange}
         />
         <PasswordInput
           name={'password'}
           placeholder={'Пароль'}
-          value={state.password}
-          onChange={handleInputChange}
+          value={form.password}
+          onChange={handleChange}
         />
       </Form>
 

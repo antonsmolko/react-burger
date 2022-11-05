@@ -26,7 +26,7 @@ const ModalOverlay = ({ onClose, animationIn = false }) => {
 
 ModalOverlay.propTypes = {
   animationIn: PropTypes.bool,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func
 };
 
 export default ModalOverlay;

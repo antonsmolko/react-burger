@@ -7,6 +7,7 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import ProfileNavLink from '../../components/profile/profile-nav-link';
 import styles from './profile.module.scss';
 import { updateUser, logout as logoutUser } from '../../services/actions/auth';
+import { useForm } from '../../hooks';
 
 export const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -18,35 +19,31 @@ export const ProfilePage = () => {
     password: ''
   };
 
-  const [state, setState] = useState(initialState);
+  const { form, setForm, handleChange } = useForm(initialState);
+
   const [stateChanged, setStateChanged] = useState(false);
 
   const submit = (e) => {
     e.preventDefault();
-    const changedState = pickBy(state, (value, key) => value !== initialState[key]);
+    const changedState = pickBy(form, (value, key) => value !== initialState[key]);
     dispatch(updateUser(changedState));
   };
 
   const cancel = () => {
-    setState(initialState);
+    setForm(initialState);
   };
 
   const logout = () => {
     dispatch(logoutUser());
   };
 
-  const handleInputChange = (event) => {
-    const { value, name } = event.target;
-    setState({ ...state, [name]: value });
-  };
-
   useEffect(() => {
-    setState(initialState);
+    setForm(initialState);
   }, [name, email]);
 
   useEffect(() => {
-    setStateChanged(!isEqual(initialState, state));
-  }, [state]);
+    setStateChanged(!isEqual(initialState, form));
+  }, [form]);
 
   return (
     <div className={'d-flex mt-30'}>
@@ -62,24 +59,24 @@ export const ProfilePage = () => {
         <Input
           type={'text'}
           placeholder={'Имя'}
-          onChange={handleInputChange}
+          onChange={handleChange}
           icon={'EditIcon'}
-          value={state.name}
+          value={form.name}
           name={'name'}
         />
         <Input
           type={'email'}
           placeholder={'Логин'}
-          onChange={handleInputChange}
+          onChange={handleChange}
           icon={'EditIcon'}
-          value={state.email}
+          value={form.email}
           name={'email'}
         />
         <PasswordInput
           placeholder={'Пароль'}
-          onChange={handleInputChange}
+          onChange={handleChange}
           icon={'EditIcon'}
-          value={state.password}
+          value={form.password}
           name={'password'}
         />
         {stateChanged &&

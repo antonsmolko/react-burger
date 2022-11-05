@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { SpinningCircles } from 'react-loading-icons';
 
 import Footer from './footer';
 import OrderDetails from '../order-details';
@@ -18,13 +19,16 @@ import { useDrop } from 'react-dnd';
 import { nanoid } from 'nanoid';
 import cn from 'classnames';
 import styles from './styles.module.scss';
+import modalStyles from '../modal/modal-layout/styles.module.scss';
 import { useAuth } from '../../hooks';
+import ModalBackDrop from '../modal/modal-layout/modal-overlay';
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loggedIn } = useAuth();
   const [isModalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const {
     ingredients,
@@ -44,11 +48,17 @@ const BurgerConstructor = () => {
       return;
     }
 
+    setLoading(true);
     const { bun, rest } = ingredients;
     const ingredientIds = [bun, ...rest, bun].filter(Boolean).map(({ _id }) => _id);
 
-    dispatch(createOrder(ingredientIds));
-    dispatch(resetConstructorIngredients());
+    dispatch(createOrder(ingredientIds))
+      .then(() => {
+        dispatch(resetConstructorIngredients());
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -80,9 +90,17 @@ const BurgerConstructor = () => {
 
   return (
     <>
+      {loading && (
+        <div className={modalStyles.container}>
+          <ModalBackDrop animationIn={true} />
+          <div className={'d-flex align-center justify-center h-full'}>
+            <SpinningCircles />
+          </div>
+        </div>
+      )}
       <section ref={dropTargetRef} className={classes}>
         <ItemsList ingredients={ingredients} />
-        <Footer items={ingredients} onCheckout={submit}/>
+        <Footer items={ingredients} onCheckout={submit} loading={loading} />
       </section>
       {isModalOpen && (
         <Modal onClose={handleClose}>

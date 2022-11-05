@@ -37,7 +37,7 @@ const ItemsList = ({ ingredients }) => {
   );
 };
 
-ItemsList.prototype = {
+ItemsList.propType = {
   ingredients: constructorItemsPropType
 };
 

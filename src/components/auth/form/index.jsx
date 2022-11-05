@@ -11,24 +11,22 @@ const Form = ({ children, onSubmit, disabled = false, title = null, buttonText =
   };
 
   return (
-    <>
-      <form className={styles.form} onSubmit={submit}>
-        {title && <p className="text text_type_main-medium">{title}</p>}
-        {children}
-        {buttonText && <Button
-          htmlType="submit"
-          type="primary"
-          size="large"
-          disabled={disabled}
-        >
-          {buttonText}
-        </Button>}
-      </form>
-    </>
+    <form className={styles.form} onSubmit={submit}>
+      {title && <p className="text text_type_main-medium">{title}</p>}
+      {children}
+      {buttonText && <Button
+        htmlType="submit"
+        type="primary"
+        size="large"
+        disabled={disabled}
+      >
+        {buttonText}
+      </Button>}
+    </form>
   );
 };
 
-Form.prototype = {
+Form.propType = {
   children: childrenPropTypes,
   onSubmit: PropTypes.func.isRequired,
   disabled: PropTypes.bool,

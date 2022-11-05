@@ -7,9 +7,16 @@ import PropTypes from 'prop-types';
 import { constructorItemPropTypes } from '../../../prop-types';
 import { removeConstructorIngredient } from '../../../services/actions/constructor';
 
+const suffixMap = {
+  top: ' (верх)',
+  bottom: ' (низ)'
+};
+
 const Item = ({ item, index = null, isLocked = false, type = null }) => {
   const dispatch = useDispatch();
   const itemStyles = cn([styles.item, { 'pr-4': isLocked }]);
+  const suffix = suffixMap[type];
+  const text = `${item.name}${suffix}`;
 
   const handleRemove = () => {
     dispatch(removeConstructorIngredient(index));
@@ -25,7 +32,7 @@ const Item = ({ item, index = null, isLocked = false, type = null }) => {
       <ConstructorElement
         type={type}
         isLocked={isLocked}
-        text={item.name}
+        text={text}
         price={item.price}
         thumbnail={item.image_mobile}
         handleClose={handleRemove}

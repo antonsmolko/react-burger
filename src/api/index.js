@@ -1,4 +1,5 @@
-import { setCookie, getCookie, ls, deleteCookie } from '../services/utils';
+import { setCookie, ls, deleteCookie } from '../services/utils';
+import api from './instance';
 
 import {
   API_INGREDIENTS_URL,
@@ -12,34 +13,6 @@ import {
   AUTH_REGISTER_URL
 } from '../config';
 
-const headers = {
-  'Content-Type': 'application/json'
-};
-
-const checkResponse = (res) => res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-
-const genAuthOptions = (options) => {
-  const accessToken = getCookie('accessToken');
-  return accessToken
-    ? {
-      ...options,
-      headers: {
-        ...headers,
-        ...options.headers,
-        Authorization: `Bearer ${accessToken}`
-      }
-    }
-    : options;
-};
-
-const genPostOptions = (payload, options) => (
-  {
-    ...options,
-    method: 'POST',
-    body: JSON.stringify(payload)
-  }
-);
-
 const saveTokens = (accessToken, refreshToken) => {
   setCookie('accessToken', accessToken.split('Bearer ')[1]);
   ls.set('refreshToken', refreshToken);
@@ -50,15 +23,7 @@ const resetTokens = () => {
   ls.remove('refreshToken');
 };
 
-const api = (url, options = {}) => fetch(url, { headers, ...options }).then(checkResponse);
-
-const apiWithAuth = (url, options = {}) => api(url, genAuthOptions(options));
-
-const apiPost = (url, payload = {}, options = {}) => api(url, genPostOptions(payload, options));
-
-const apiPostWithAuth = (url, payload = {}, options = {}) => apiWithAuth(url, genPostOptions(payload, options));
-
-export const refreshTokenRequest = () => apiPost(AUTH_TOKEN_URL, {
+export const refreshTokenRequest = () => api.post(AUTH_TOKEN_URL, {
   token: ls.get('refreshToken')
 });
 
@@ -77,16 +42,16 @@ const apiWithRefreshToken = async (requestCallback) => {
   }
 };
 
-export const getIngredientsRequest = () => api(API_INGREDIENTS_URL);
+export const getIngredientsRequest = () => api.get(API_INGREDIENTS_URL);
 
-export const orderRequest = (ingredients) => apiPostWithAuth(API_ORDERS_URL, { ingredients });
+export const orderRequest = (ingredients) => api.postWithAuth(API_ORDERS_URL, { ingredients });
 
-export const forgotPasswordRequest = (email) => apiPost(PASSWORD_FORGOT_URL, { email });
+export const forgotPasswordRequest = (email) => api.post(PASSWORD_FORGOT_URL, { email });
 
-export const resetPasswordRequest = (payload) => apiPost(PASSWORD_RESET_URL, payload);
+export const resetPasswordRequest = (payload) => api.post(PASSWORD_RESET_URL, payload);
 
 export const loginRequest = async (payload) => {
-  const response = await apiPost(AUTH_LOGIN_URL, payload);
+  const response = await api.post(AUTH_LOGIN_URL, payload);
   const { accessToken, refreshToken } = response;
   saveTokens(accessToken, refreshToken);
 
@@ -94,7 +59,7 @@ export const loginRequest = async (payload) => {
 };
 
 export const registerRequest = async (payload) => {
-  const response = await apiPost(AUTH_REGISTER_URL, payload);
+  const response = await api.post(AUTH_REGISTER_URL, payload);
   const { accessToken, refreshToken } = response;
   saveTokens(accessToken, refreshToken);
 
@@ -102,7 +67,7 @@ export const registerRequest = async (payload) => {
 };
 
 export const logoutRequest = () => apiWithRefreshToken(
-  () => apiPostWithAuth(AUTH_LOGOUT_URL, {
+  () => api.postWithAuth(AUTH_LOGOUT_URL, {
     token: ls.get('refreshToken')
   })
     .then((response) => {
@@ -113,9 +78,9 @@ export const logoutRequest = () => apiWithRefreshToken(
       throw new Error(error);
     }));
 
-export const fetchUserRequest = () => apiWithRefreshToken(() => apiWithAuth(AUTH_USER_URL));
+export const fetchUserRequest = () => apiWithRefreshToken(() => api.getWithAuth(AUTH_USER_URL));
 
-export const updateUserRequest = (payload) => apiWithRefreshToken(() => apiWithAuth(AUTH_USER_URL, {
+export const updateUserRequest = (payload) => apiWithRefreshToken(() => api.getWithAuth(AUTH_USER_URL, {
   method: 'PATCH',
   body: JSON.stringify(payload)
 }));
