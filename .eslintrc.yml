@@ -1,0 +1,35 @@
+env:
+  browser: true
+  node: true
+  es2022: true
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: latest
+  sourceType: module
+extends:
+  - 'plugin:@typescript-eslint/recommended'
+rules:
+  indent:
+    - error
+    - 2
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - always
+  no-tabs: 0
+  react/jsx-indent-props: 0
+  no-param-reassign:
+    - error
+    - props: true
+      ignorePropertyModificationsFor:
+      - state
+  max-len:
+    - error
+    - code: 120
+
