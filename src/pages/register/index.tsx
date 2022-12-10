@@ -1,23 +1,21 @@
 import React, { FC }  from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import { Link } from 'react-router-dom';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import Form from '../../components/auth/form';
-import { register } from '../../services/actions/auth';
+import { register } from '../../services/actions';
 import { useForm } from '../../hooks';
+import { TUserRegisterRequest } from '../../services/types';
 
 export const RegisterPage: FC = () => {
   const dispatch = useDispatch();
-  const { form, handleChange } = useForm({
+  const { form, handleChange } = useForm<TUserRegisterRequest>({
     name: '',
     email: '',
     password: ''
   });
 
-  const submit = async () => {
-    // @FIXME: next sprint
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+  const submit = () => {
     dispatch(register(form));
   };
 

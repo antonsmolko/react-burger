@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { useNavigate } from 'react-router-dom';
 import { SpinningCircles } from 'react-loading-icons';
 
@@ -9,11 +9,11 @@ import Modal from '../modal';
 import {
   addConstructorIngredient,
   resetConstructorIngredients
-} from '../../services/actions/constructor';
+} from '../../services/actions';
 import {
-  resetCurrentOrder,
+  resetCurrentOrderAction,
   createOrder
-} from '../../services/actions/order';
+} from '../../services/actions';
 import ItemsList from './items-list';
 import { useDrop } from 'react-dnd';
 import { nanoid } from 'nanoid';
@@ -36,18 +36,9 @@ const BurgerConstructor = () => {
     createOrderRequest,
     createOrderFailed
   } = useSelector((store) => ({
-    // @FIXME: next sprint
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     ingredients: store.burgerConstructor.items,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     order: store.order.current,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     createOrderFailed: store.order.createOrderFailed,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     createOrderRequest: store.order.createOrderRequest
   }));
 
@@ -61,9 +52,6 @@ const BurgerConstructor = () => {
     const { bun, rest } = ingredients;
     const ingredientIds = [bun, ...rest, bun].filter(Boolean).map(({ _id }) => _id);
 
-    // @FIXME: next sprint
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     dispatch(createOrder(ingredientIds))
       .then(() => {
         dispatch(resetConstructorIngredients());
@@ -83,7 +71,7 @@ const BurgerConstructor = () => {
 
   const handleClose = () => {
     setModalOpen(false);
-    dispatch(resetCurrentOrder());
+    dispatch(resetCurrentOrderAction());
   };
 
   const [{ isHover }, dropTargetRef] = useDrop({
@@ -92,7 +80,6 @@ const BurgerConstructor = () => {
       isHover: monitor.isOver()
     }),
     drop(item) {
-      // @FIXME: next sprint
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       dispatch(addConstructorIngredient({ ...item, dragId: nanoid() }));
@@ -117,7 +104,7 @@ const BurgerConstructor = () => {
         <ItemsList ingredients={ingredients} />
         <Footer items={ingredients} onCheckout={submit} loading={loading} />
       </section>
-      {isModalOpen && (
+      {isModalOpen && order && (
         <Modal onClose={handleClose}>
           <OrderDetails orderNumber={order.number} />
         </Modal>

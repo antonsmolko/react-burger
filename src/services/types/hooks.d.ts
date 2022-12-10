@@ -1,3 +1,5 @@
+import { TIngredient } from './common';
+
 export type TUseConstructorIngredientsQtyMap = () => {
   [id: string | number]: number;
 }
@@ -14,7 +16,14 @@ export type TUseForm = <T extends TUseFormInitialState>(T) => {
   setForm: (TUseFormHandleChange) => void;
 }
 
+export type TUsePreview = () => ({
+  [name: string]: TIngredient
+})
+
+export type TUseIngredients = () => ({
+  [id: string]: TIngredient
+})
+
 export type TUseLocalStorageSetValue = (unknown) => void
 
 export type TUseLocalStorage = (key: string, initialValue: unknown) => [unknown, TUseLocalStorageSetValue]
-

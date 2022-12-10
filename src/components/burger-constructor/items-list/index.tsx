@@ -1,8 +1,8 @@
 import React, { useCallback, FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../services/hooks';
 import Item from '../item';
 import styles from '../styles.module.scss';
-import { updateConstructorIngredients } from '../../../services/actions/constructor';
+import { updateConstructorIngredients } from '../../../services/actions';
 import DragItem from '../drag-item';
 
 import {IConstructorItemsList, TConstructorDragIngredient, TConstructorMoveItem} from '../../../services/types';

@@ -1,3 +1,5 @@
+import { TUser } from './contexts';
+
 export type TApiSaveToken = (accessToken: string, refreshToken: string) => void
 
 export type TApiResetToken = () => void
@@ -8,6 +10,12 @@ export type TApiWithRefreshToken = (requestCallback: () => Promise<Response | vo
 
 export type TApiOrderRequest = (ingredients: Array<number>) => Promise
 
+export type TUserRegisterRequest = {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export type TApiForgotPasswordRequest = (email: string) => Promise
 
 type TApiResetPasswordRequestPayload = {
@@ -16,24 +24,23 @@ type TApiResetPasswordRequestPayload = {
 }
 export type TApiResetPasswordRequest = (payload: TApiResetPasswordRequestPayload) => Promise
 
-type TApiLoginRequestPayload = {
+export type TApiLoginRequest = (payload: TUserRegisterRequest) => Promise
+
+type TApiRegisterRequestPayload = {
+  name: string;
   email: string;
   password: string;
 }
 
-export type TApiLoginRequest = (payload: TApiLoginRequestPayload) => Promise
-
-type TApiRegisterRequestPayload = TApiLoginRequestPayload & {
-  name: string;
-}
-
-export type TApiRegisterRequest = (payload: TApiRegisterRequestPayload) => Promise<TApiRegisterRequestResponse>
+export type TApiRegisterRequest = (payload: TApiRegisterRequestPayload) => Promise
 
 type TApiUpdateUserRequestPayload = {
   [p: string]: string;
 }
 
-export type TApiUpdateUserRequest = (payload: TApiUpdateUserRequestPayload) => Promise
+export type TApiUpdateUserRequest = (payload: TApiUpdateUserRequestPayload) => Promise<
+  TResponseBody<'user' | 'success', TUser | boolean>
+>
 
 export type TApiCheckResponse = (res: Response) => Promise
 

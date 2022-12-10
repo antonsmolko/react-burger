@@ -51,6 +51,10 @@ img {
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
 /** Height
 ==================================================== */
 .h-inherit {
@@ -82,4 +86,26 @@ img {
 .custom-scroll {
   overflow-y: scroll;
   height: inherit;
+}
+
+/** Content
+==================================================== */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  height: inherit;
+
+  > section {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    box-sizing: border-box;
+  }
+}
+
+/** Spacers
+==================================================== */
+.ml-auto {
+  margin-left: auto;
 }

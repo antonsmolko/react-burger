@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import { Link, useLocation, Navigate } from 'react-router-dom';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import Form from '../../components/auth/form';
-import { resetPassword } from '../../services/actions/auth';
+import { resetPassword } from '../../services/actions';
 import { getQueryParams } from '../../services/utils';
 import { useForm } from '../../hooks';
+import { TApiResetPasswordRequestPayload } from '../../services/types';
 
 export const ResetPasswordPage: FC = () => {
   const { search } = useLocation();
@@ -17,15 +18,12 @@ export const ResetPasswordPage: FC = () => {
 
   const dispatch = useDispatch();
 
-  const { form, handleChange } = useForm({
+  const { form, handleChange } = useForm<TApiResetPasswordRequestPayload>({
     password: '',
     token: ''
   });
 
-  const submit = async () => {
-    // @FIXME: next sprint
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+  const submit = () => {
     dispatch(resetPassword(form));
   };
 

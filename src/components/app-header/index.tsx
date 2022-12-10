@@ -11,7 +11,7 @@ const AppHeader: FC = () => {
         <nav className={appHeaderStyles.nav}>
           <div className={appHeaderStyles.navLeft}>
             <NavItem icon="burger" label="Конструктор" to={'/'} />
-            <NavItem icon="list" label="Лента заказов" to={'/band'} />
+            <NavItem icon="list" label="Лента заказов" to={'/feed'} />
           </div>
           <Link to={'/'}><Logo /></Link>
           <div className={appHeaderStyles.navRight}>

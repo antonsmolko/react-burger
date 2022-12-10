@@ -1,4 +1,5 @@
 export { TIngredients } from './ingredients';
+import { TIngredient } from './common';
 
 export type TConstructorDragIngredient = TIngredient & {
   dragId?: string;
@@ -34,6 +35,11 @@ export interface IConstructorDragItem {
   index: number;
 }
 
+export type TConstructorIngredient = TIngredient & {
+  id: string;
+};
+
 export type TDragItem = {
+  ingredient: TConstructorIngredient;
   index: number;
 }

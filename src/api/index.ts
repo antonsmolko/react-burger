@@ -17,13 +17,21 @@ import {
   TApiWithRefreshToken,
   TApiResetToken,
   TApiSaveToken,
-  TApiOrderRequest,
   TApiResetPasswordRequest,
   TApiForgotPasswordRequest,
   TApiLoginRequest,
   TApiRegisterRequest,
-  TApiUpdateUserRequest
+  TApiUpdateUserRequest,
+  TIngredientsIngredient, TUser, IOrder
 } from '../services/types';
+
+type TResponseBody<TDataKey extends string = '', TDataType = Record<string, unknown>> = {
+  [key in TDataKey]: TDataType
+} & {
+  success: boolean;
+  message?: string;
+  headers?: Headers;
+};
 
 const saveTokens: TApiSaveToken = (accessToken, refreshToken) => {
   setCookie('accessToken', accessToken.split('Bearer ')[1]);
@@ -54,9 +62,21 @@ const apiWithRefreshToken: TApiWithRefreshToken = async (requestCallback) => {
   }
 };
 
-export const getIngredientsRequest: TApiRequest = () => api.get(API_INGREDIENTS_URL);
+export const getIngredientsRequest = (): Promise<
+  TResponseBody<'data', Array<TIngredientsIngredient>>
+  > => api.get(API_INGREDIENTS_URL);
 
-export const orderRequest: TApiOrderRequest = (ingredients) => api.postWithAuth(API_ORDERS_URL, { ingredients });
+export const orderRequest = (ingredients: string[]): Promise<
+  TResponseBody<'order', IOrder>
+> => api.postWithAuth(API_ORDERS_URL, { ingredients });
+
+export const getOrderRequest = (number: string): Promise<
+  TResponseBody<'orders', IOrder[]>
+> => api.get(`${API_ORDERS_URL}/${number}`);
+
+export const getUserOrderRequest = (number: string): Promise<
+  TResponseBody<'orders', IOrder[]>
+> => api.getWithAuth(`${API_ORDERS_URL}/${number}`);
 
 export const forgotPasswordRequest: TApiForgotPasswordRequest = (email) => api.post(PASSWORD_FORGOT_URL, { email });
 
@@ -70,7 +90,9 @@ export const loginRequest: TApiLoginRequest = async (payload) => {
   return response;
 };
 
-export const registerRequest: TApiRegisterRequest = async (payload) => {
+export const registerRequest: TApiRegisterRequest = async (payload): Promise<
+  TResponseBody<'user' | 'success', TUser | boolean>
+> => {
   const response = await api.post(AUTH_REGISTER_URL, payload);
   const { accessToken, refreshToken } = response;
   saveTokens(accessToken, refreshToken);

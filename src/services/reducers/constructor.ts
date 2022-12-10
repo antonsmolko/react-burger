@@ -3,16 +3,24 @@ import {
   REMOVE_CONSTRUCTOR_INGREDIENT,
   RESET_CONSTRUCTOR_INGREDIENTS,
   UPDATE_CONSTRUCTOR_INGREDIENTS
-} from '../actions/constructor';
+} from '../constants/constructor';
+import { TConstructorIngredients } from '../types';
+import { TConstructorActions } from '../actions';
 
-const initialState = {
+type TConstructorState = {
+  items: TConstructorIngredients;
+}
+
+const initialState: TConstructorState = {
   items: {
     bun: null,
     rest: []
   }
 };
 
-export const constructor = (state = initialState, action) => {
+export const constructor = (
+  state: TConstructorState = initialState, action: TConstructorActions
+): TConstructorState => {
   switch (action.type) {
   case ADD_CONSTRUCTOR_INGREDIENT: {
     const key = action.payload.type === 'bun' ? 'bun' : 'rest';

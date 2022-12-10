@@ -20,9 +20,30 @@ import {
   UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILED,
-} from '../actions/auth';
+} from '../constants/auth';
+import { TUser } from '../types';
+import { TAuthActions } from '../actions';
 
-const initialState = {
+export type TAuthState = {
+  ready: boolean;
+  user: TUser;
+  loggedIn: boolean;
+  loginRequest: boolean;
+  loginFailed: boolean;
+  registerRequest: boolean;
+  registerFailed: boolean;
+  logoutRequest: boolean;
+  logoutFailed: boolean;
+  forgotPasswordRequest: boolean;
+  forgotPasswordFailed: boolean;
+  resetPasswordRequest: boolean;
+  resetPasswordFailed: boolean;
+  fetchUserRequest: boolean;
+  fetchUserFailed: boolean;
+  updateUserRequest: boolean;
+  updateUserFailed: boolean ;};
+
+const initialState: TAuthState = {
   ready: false,
   user: {
     email: '',
@@ -45,7 +66,7 @@ const initialState = {
   updateUserFailed: false
 };
 
-export const auth = (state = initialState, action) => {
+export const auth = (state: TAuthState = initialState, action: TAuthActions): TAuthState => {
   switch (action.type) {
   case LOGIN_REQUEST: {
     return {

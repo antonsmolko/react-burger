@@ -1,0 +1,12 @@
+@import '../../scss';
+
+$queue-gap: map-get($spacers, 9);
+
+.queue {
+  display: flex;
+  gap: $queue-gap;
+
+  > div {
+    width: calc(100% - $queue-gap / 2);
+  }
+}

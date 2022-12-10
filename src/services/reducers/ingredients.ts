@@ -2,15 +2,23 @@ import {
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS
-} from '../actions/ingredients';
+} from '../constants/ingredients';
+import { TIngredientsIngredient } from '../types';
+import { TIngredientsActions } from '../actions';
 
-const initialState = {
+type TIngredientState = {
+  items: TIngredientsIngredient[];
+  ingredientsRequest: boolean;
+  ingredientsFailed: boolean;
+}
+
+const initialState: TIngredientState = {
   items: [],
   ingredientsRequest: false,
   ingredientsFailed: false
 };
 
-export const ingredients = (state = initialState, action) => {
+export const ingredients = (state: TIngredientState = initialState, action: TIngredientsActions): TIngredientState => {
   switch (action.type) {
   case GET_INGREDIENTS_REQUEST: {
     return {

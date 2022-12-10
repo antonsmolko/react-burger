@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import throttle from 'lodash/throttle';
 import TypeSection from './type-section';
@@ -20,9 +20,6 @@ const genItemsMap = <T extends TIngredientsIngredient>(items: Array<T>) => items
   });
 
 const BurgerIngredients = () => {
-  // @FIXME: next sprint
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   const ingredients = useSelector((store) => store.ingredients.items);
   const initialCurrentState: TIngredientType = 'bun';
   const [current, setCurrent] = useState<TIngredientType>(initialCurrentState);

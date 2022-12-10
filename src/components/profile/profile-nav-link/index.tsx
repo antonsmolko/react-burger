@@ -9,12 +9,12 @@ const ProfileNavLink: FC<IProfile> = ({ children, to, onClick }) => {
     styles.profileNavLink,
     'text text_type_main-medium',
     {
-      text_color_inactive: props && !props.isActive,
+      text_color_inactive: !props?.isActive,
     }
   ]);
 
   return to
-    ? <NavLink to={to} className={genClassName}>{children}</NavLink>
+    ? <NavLink end to={to} className={genClassName}>{children}</NavLink>
     : <div className={genClassName()} onClick={onClick}>{children}</div>;
 };
 

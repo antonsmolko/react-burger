@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../services/hooks';
 import styles from './styles.module.scss';
 import cn from 'classnames';
-import { removeConstructorIngredient } from '../../../services/actions/constructor';
+import { removeConstructorIngredient } from '../../../services/actions';
 import { IConstructorItem } from '../../../services/types';
 
 type TSuffixMap = {
