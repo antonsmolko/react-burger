@@ -13,5 +13,5 @@ export const AUTH_LOGOUT_URL = `${API_BASE_URL}/auth/logout`;
 export const MODAL_ANIMATION_TIME = 300;
 
 
-export const WS_ORDERS_ALL_URL = `${WS_BASE_URL}/orders/all`;
-export const WS_USER_ORDERS_URL = `${WS_BASE_URL}/orders`;
+export const WS_FEED_URL = `${WS_BASE_URL}/orders/all`;
+export const WS_USER_FEED_URL = `${WS_BASE_URL}/orders`;

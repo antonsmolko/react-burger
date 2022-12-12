@@ -8,7 +8,8 @@ import {
   TConstructorActions,
   TIngredientsActions,
   TOrderActions,
-  TWsActions
+  TWsFeedActions,
+  TWsUserFeedActions
 } from '../actions';
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -19,7 +20,8 @@ export type TApplicationActions =
   | TConstructorActions
   | TIngredientsActions
   | TOrderActions
-  | TWsActions;
+  | TWsFeedActions
+  | TWsUserFeedActions;
 
 // Типизация thunk'ов в нашем приложении
 export type AppThunk<TReturn = void> = ActionCreator<

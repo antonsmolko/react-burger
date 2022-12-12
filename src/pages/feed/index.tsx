@@ -2,8 +2,8 @@ import React, { FC, useEffect } from 'react';
 import OrdersFeed from '../../components/orders-feed';
 import OrdersBoard from '../../components/orders-board';
 import { useDispatch, useSelector } from '../../services/hooks';
-import { wsConnectAction, wsDisconnectAction } from '../../services/actions';
-import { WS_ORDERS_ALL_URL } from '../../config';
+import { wsFeedConnectAction, wsFeedDisconnectAction } from '../../services/actions';
+import { WsConnectionStatus } from '../../services/enums';
 
 
 export const FeedPage: FC = () => {
@@ -11,20 +11,26 @@ export const FeedPage: FC = () => {
   const {
     orders,
     total,
-    totalToday
+    totalToday,
+    connectionStatus
   } = useSelector((store) => ({
-    orders: store.ws.orders,
-    total: store.ws.total,
-    totalToday: store.ws.totalToday
+    orders: store.wsFeed.orders,
+    total: store.wsFeed.total,
+    totalToday: store.wsFeed.totalToday,
+    connectionStatus: store.wsFeed.connectionStatus
   }));
 
   useEffect(() => {
-    dispatch(wsConnectAction(WS_ORDERS_ALL_URL));
+    if (connectionStatus === WsConnectionStatus.OFFLINE) {
+      dispatch(wsFeedConnectAction());
+    }
 
     return () => {
-      dispatch(wsDisconnectAction());
+      if (connectionStatus === WsConnectionStatus.ONLINE) {
+        dispatch(wsFeedDisconnectAction());
+      }
     };
-  }, []);
+  }, [dispatch, connectionStatus]);
 
   return (
     <div className="content">

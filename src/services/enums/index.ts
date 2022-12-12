@@ -4,3 +4,10 @@ export enum OrderStatus {
   DONE = 'done',
   CANCELLED = 'cancelled'
 }
+
+export enum WsConnectionStatus {
+  CONNECTING = 'connecting',
+  DISCONNECTING = 'disconnecting',
+  OFFLINE = 'offline',
+  ONLINE = 'online'
+}

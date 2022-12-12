@@ -1,4 +1,5 @@
 import { IOrder } from './order';
+import { TWsFeedActions, TWsUserFeedActions } from '../actions';
 
 export enum WsStatus {
   CONNECTING = 'CONNECTING',
@@ -11,4 +12,10 @@ export interface IWsData {
   success: boolean,
   total: number,
   totalToday: number
+}
+
+type TActionName = 'close' | 'open' | 'onError' | 'onMessage'
+
+export type TWsActions = {
+  [key in TActionName]: (param?: string | IWsData) => TWsFeedActions | TWsUserFeedActions
 }

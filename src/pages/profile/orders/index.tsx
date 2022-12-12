@@ -2,21 +2,31 @@ import React, { useEffect, FC } from 'react';
 import { useDispatch, useSelector } from '../../../services/hooks';
 import { ProfileLayout } from '../layout';
 import OrderList from '../../../components/order-list';
-import { wsConnectAction, wsDisconnectAction } from '../../../services/actions';
-import { WS_USER_ORDERS_URL } from '../../../config';
+import {
+  wsUserFeedConnectAction,
+  wsUserFeedDisconnectAction
+} from '../../../services/actions';
+import { WsConnectionStatus } from '../../../services/enums';
 
 export const ProfileOrdersPage: FC = () => {
   const dispatch = useDispatch();
-  const orders = useSelector((store) => store.ws.orders);
+  const { orders, connectionStatus } = useSelector((store) => ({
+    orders: store.wsUserFeed.orders,
+    connectionStatus: store.wsUserFeed.connectionStatus,
+  }));
   const sortedOrders = [...orders].reverse();
 
   useEffect(() => {
-    dispatch(wsConnectAction(WS_USER_ORDERS_URL, true));
+    if (connectionStatus === WsConnectionStatus.OFFLINE) {
+      dispatch(wsUserFeedConnectAction());
+    }
 
     return () => {
-      dispatch(wsDisconnectAction());
+      if (connectionStatus === WsConnectionStatus.ONLINE) {
+        dispatch(wsUserFeedDisconnectAction());
+      }
     };
-  }, []);
+  }, [dispatch, connectionStatus]);
 
   return (
     <ProfileLayout>
