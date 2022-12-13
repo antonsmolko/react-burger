@@ -37,6 +37,15 @@ export interface IWsUserFeedOpenAction {
   readonly type: typeof WS_USER_FEED_OPEN;
 }
 
+export const wsUserFeedConstants = {
+  connect: WS_USER_FEED_CONNECT,
+  disconnect: WS_USER_FEED_DISCONNECT,
+  close: WS_USER_FEED_CLOSE,
+  open: WS_USER_FEED_OPEN,
+  onerror: WS_USER_FEED_ERROR,
+  onmessage: WS_USER_FEED_MESSAGE
+};
+
 export type TWsUserFeedActions =
   | IWsUserFeedConnectAction
   | IWsUserFeedDisconnectAction
@@ -47,24 +56,6 @@ export type TWsUserFeedActions =
 
 export const wsUserFeedDisconnectAction = (): IWsUserFeedDisconnectAction => ({
   type: WS_USER_FEED_DISCONNECT
-});
-
-export const wsUserFeedCloseAction = (): IWsUserFeedCloseAction => ({
-  type: WS_USER_FEED_CLOSE
-});
-
-export const wsUserFeedOpenAction = (): IWsUserFeedOpenAction => ({
-  type: WS_USER_FEED_OPEN
-});
-
-export const wsUserFeedErrorAction = (error: string): IWsUserFeedErrorAction => ({
-  type: WS_USER_FEED_ERROR,
-  payload: error
-});
-
-export const wsUserFeedMessageAction = (data: IWsData): IWsUserFeedMessageAction => ({
-  type: WS_USER_FEED_MESSAGE,
-  payload: data
 });
 
 export const wsUserFeedConnectAction = (): IWsUserFeedConnectAction => ({

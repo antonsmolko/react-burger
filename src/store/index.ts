@@ -1,11 +1,16 @@
 import { applyMiddleware } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from '../services/reducers';
-import { createWsFeedMiddleware, createWsUserFeedMiddleware } from './middleware';
+import { wsMiddleware } from './middleware';
 import thunk from 'redux-thunk';
+import { wsFeedConstants, wsUserFeedConstants } from '../services/actions';
 
 export default configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production',
-  enhancers: [applyMiddleware(thunk, createWsFeedMiddleware(), createWsUserFeedMiddleware())]
+  enhancers: [applyMiddleware(
+    thunk,
+    wsMiddleware(wsFeedConstants),
+    wsMiddleware(wsUserFeedConstants)
+  )]
 });

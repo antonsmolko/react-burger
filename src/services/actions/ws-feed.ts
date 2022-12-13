@@ -36,6 +36,15 @@ export interface IWsFeedOpenAction {
   readonly type: typeof WS_FEED_OPEN;
 }
 
+export const wsFeedConstants = {
+  connect: WS_FEED_CONNECT,
+  disconnect: WS_FEED_DISCONNECT,
+  close: WS_FEED_CLOSE,
+  open: WS_FEED_OPEN,
+  onerror: WS_FEED_ERROR,
+  onmessage: WS_FEED_MESSAGE
+};
+
 export type TWsFeedActions =
   | IWsFeedConnectAction
   | IWsFeedDisconnectAction
@@ -46,24 +55,6 @@ export type TWsFeedActions =
 
 export const wsFeedDisconnectAction = (): IWsFeedDisconnectAction => ({
   type: WS_FEED_DISCONNECT
-});
-
-export const wsFeedCloseAction = (): IWsFeedCloseAction => ({
-  type: WS_FEED_CLOSE
-});
-
-export const wsFeedOpenAction = (): IWsFeedOpenAction => ({
-  type: WS_FEED_OPEN
-});
-
-export const wsFeedErrorAction = (error: string): IWsFeedErrorAction => ({
-  type: WS_FEED_ERROR,
-  payload: error
-});
-
-export const wsFeedMessageAction = (data: IWsData): IWsFeedMessageAction => ({
-  type: WS_FEED_MESSAGE,
-  payload: data
 });
 
 export const wsFeedConnectAction = (): IWsFeedConnectAction => ({

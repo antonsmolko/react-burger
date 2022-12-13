@@ -15,11 +15,15 @@ const IngredientPreviews: FC<IIngredientPreviews> = ({ items }) => {
   const displayedPreviewsLastIndex = displayedPreviews.length - 1;
   const more = Math.max(0, items.length - PREVIEWS_COUNT);
 
+  if (!ingredients) return null;
+
   return (
     <div className={styles.previews}>
       {
         displayedPreviews.map((id, index) => {
           const ingredient = ingredients[id];
+
+          if (!ingredient) return null;
 
           return (
             <IngredientPreview

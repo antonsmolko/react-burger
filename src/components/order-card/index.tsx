@@ -14,7 +14,7 @@ interface IOrderCard {
 
 const OrderCard: FC<IOrderCard> = ({ order }) => {
   const ingredients = useIngredients();
-  const orderPrice = order.ingredients.reduce((acc, id) => acc + ingredients[id].price, 0);
+  const orderPrice = order.ingredients.reduce((acc, id) => acc + ingredients[id]?.price, 0);
 
   return (
     <div className={styles.card}>
