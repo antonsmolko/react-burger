@@ -10,7 +10,7 @@ export const getCookie: TGetCookie = (name) => {
 };
 
 export const setCookie: TSetCookie = (name, value, props = {}) => {
-  const internalProps = { ...props };
+  const internalProps = { path: '/', ...props };
   let { expires } = internalProps;
 
   if (expires && typeof expires === 'number') {
