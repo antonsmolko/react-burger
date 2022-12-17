@@ -6,9 +6,9 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED
-} from '../constants/order';
-import { TOrderActions } from '../actions';
-import { IOrder } from '../types';
+} from '../../constants/order';
+import { TOrderActions } from '../../actions';
+import { IOrder } from '../../types';
 
 type TOrderState = {
   current: null | IOrder;
@@ -18,7 +18,7 @@ type TOrderState = {
   getOrderFailed: boolean;
 }
 
-const initialState = {
+export const initialState = {
   current: null,
   createOrderRequest: false,
   createOrderFailed: false,

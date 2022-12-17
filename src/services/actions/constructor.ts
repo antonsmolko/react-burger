@@ -5,11 +5,11 @@ import {
   UPDATE_CONSTRUCTOR_INGREDIENTS
 } from '../constants/constructor';
 
-import { TConstructorIngredient } from '../types';
+import { TConstructorDragIngredient } from '../types';
 
 export interface IAddConstructorIngredientAction {
   readonly type: typeof ADD_CONSTRUCTOR_INGREDIENT;
-  readonly payload: TConstructorIngredient;
+  readonly payload: TConstructorDragIngredient;
 }
 
 export interface IRemoveConstructorIngredientAction {
@@ -23,7 +23,7 @@ export interface IResetConstructorIngredientsAction {
 
 export interface IUpdateConstructorIngredientsAction {
   readonly type: typeof UPDATE_CONSTRUCTOR_INGREDIENTS;
-  readonly payload: TConstructorIngredient[]
+  readonly payload: TConstructorDragIngredient[]
 }
 
 export type TConstructorActions =
@@ -32,7 +32,7 @@ export type TConstructorActions =
   | IResetConstructorIngredientsAction
   | IUpdateConstructorIngredientsAction;
 
-export const addConstructorIngredient = (item: TConstructorIngredient): IAddConstructorIngredientAction => ({
+export const addConstructorIngredient = (item: TConstructorDragIngredient): IAddConstructorIngredientAction => ({
   type: ADD_CONSTRUCTOR_INGREDIENT,
   payload: item
 });
@@ -46,7 +46,9 @@ export const resetConstructorIngredients = (): IResetConstructorIngredientsActio
   type: RESET_CONSTRUCTOR_INGREDIENTS
 });
 
-export const updateConstructorIngredients = (items: TConstructorIngredient[]): IUpdateConstructorIngredientsAction => ({
+export const updateConstructorIngredients = (
+  items: TConstructorDragIngredient[]
+): IUpdateConstructorIngredientsAction => ({
   type: UPDATE_CONSTRUCTOR_INGREDIENTS,
   payload: items
 });

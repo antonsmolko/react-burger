@@ -2,9 +2,9 @@ import {
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS
-} from '../constants/ingredients';
-import { TIngredientsIngredient } from '../types';
-import { TIngredientsActions } from '../actions';
+} from '../../constants/ingredients';
+import { TIngredientsIngredient } from '../../types';
+import { TIngredientsActions } from '../../actions';
 
 type TIngredientState = {
   items: TIngredientsIngredient[];
@@ -12,7 +12,7 @@ type TIngredientState = {
   ingredientsFailed: boolean;
 }
 
-const initialState: TIngredientState = {
+export const initialState: TIngredientState = {
   items: [],
   ingredientsRequest: false,
   ingredientsFailed: false
