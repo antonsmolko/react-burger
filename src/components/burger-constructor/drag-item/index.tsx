@@ -67,6 +67,7 @@ const DragItem: FC<IConstructorDragItem> = ({ move, item, index }) => {
 
   return (
     <div
+      data-testid={`order-drag-item-${index}`}
       data-handler-id={handlerId}
       onDrop={preventDefault}
       ref={ref}

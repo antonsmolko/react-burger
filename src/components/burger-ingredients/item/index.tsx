@@ -5,7 +5,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import styles from './styles.module.scss';
 import { IIngredientItem } from '../../../services/types';
 
-const Item: FC<IIngredientItem> = ({ item, qty = 0 }) => {
+const Item: FC<IIngredientItem> = ({ item, index, qty = 0 }) => {
   const { name, price, image } = item;
 
   const location = useLocation();
@@ -25,7 +25,12 @@ const Item: FC<IIngredientItem> = ({ item, qty = 0 }) => {
       to={`/ingredients/${ingredientId}`}
       state={{ background: location }}
     >
-      <div ref={dragRef} className={styles.item} style={{ opacity }}>
+      <div
+        ref={dragRef}
+        className={styles.item}
+        style={{ opacity }}
+        data-testid={`drag-item-${item.type}-${index}`}
+      >
         {qty > 0 && <Counter count={qty} size="default" />}
         <div className={`${styles.image} pl-4 pr-4 mb-1`}>
           <img src={image} alt={name}/>

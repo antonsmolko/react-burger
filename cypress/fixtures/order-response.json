@@ -1,0 +1,105 @@
+{
+  "success": true,
+  "name": "Space флюоресцентный антарианский бургер",
+  "order": {
+    "ingredients": [
+      {
+        "_id": "60d3b41abdacab0026a733c7",
+        "name": "Флюоресцентная булка R2-D3",
+        "type": "bun",
+        "proteins": 44,
+        "fat": 26,
+        "carbohydrates": 85,
+        "calories": 643,
+        "price": 988,
+        "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "60d3b41abdacab0026a733cd",
+        "name": "Соус фирменный Space Sauce",
+        "type": "sauce",
+        "proteins": 50,
+        "fat": 22,
+        "carbohydrates": 11,
+        "calories": 14,
+        "price": 80,
+        "image": "https://code.s3.yandex.net/react/code/sauce-04.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/sauce-04-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "60d3b41abdacab0026a733cf",
+        "name": "Соус с шипами Антарианского плоскоходца",
+        "type": "sauce",
+        "proteins": 101,
+        "fat": 99,
+        "carbohydrates": 100,
+        "calories": 100,
+        "price": 88,
+        "image": "https://code.s3.yandex.net/react/code/sauce-01.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/sauce-01-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/sauce-01-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "60d3b41abdacab0026a733cd",
+        "name": "Соус фирменный Space Sauce",
+        "type": "sauce",
+        "proteins": 50,
+        "fat": 22,
+        "carbohydrates": 11,
+        "calories": 14,
+        "price": 80,
+        "image": "https://code.s3.yandex.net/react/code/sauce-04.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/sauce-04-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "60d3b41abdacab0026a733cf",
+        "name": "Соус с шипами Антарианского плоскоходца",
+        "type": "sauce",
+        "proteins": 101,
+        "fat": 99,
+        "carbohydrates": 100,
+        "calories": 100,
+        "price": 88,
+        "image": "https://code.s3.yandex.net/react/code/sauce-01.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/sauce-01-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/sauce-01-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "60d3b41abdacab0026a733c7",
+        "name": "Флюоресцентная булка R2-D3",
+        "type": "bun",
+        "proteins": 44,
+        "fat": 26,
+        "carbohydrates": 85,
+        "calories": 643,
+        "price": 988,
+        "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+        "__v": 0
+      }
+    ],
+    "_id": "639f296199a25c001cd6a71f",
+    "owner": {
+      "name": "Anthony",
+      "email": "asmolko@yandex.ru",
+      "createdAt": "2022-11-01T19:15:56.927Z",
+      "updatedAt": "2022-11-05T19:06:03.819Z"
+    },
+    "status": "done",
+    "name": "Space флюоресцентный антарианский бургер",
+    "createdAt": "2022-12-18T14:53:21.408Z",
+    "updatedAt": "2022-12-18T14:53:21.795Z",
+    "number": 34639,
+    "price": 2312
+  }
+}
