@@ -1,8 +1,16 @@
 import { API_INGREDIENTS_URL, API_ORDERS_URL, AUTH_USER_URL } from '../../src/config';
 
+const ITEM_LIST_SELECTOR = '.item-list';
+const DRAG_ITEM_BUN_SELECTOR = '[data-testid=drag-item-bun-0]';
+const MODAL_ROOT_SELECTOR = '#modal-root';
+const INGREDIENT_DETAILS_SELECTOR = `${MODAL_ROOT_SELECTOR} [data-testid=ingredient-details]`;
+const ORDER_DRAG_ITEM_FIRST_SELECTOR = '[data-testid=order-drag-item-0]';
+const ORDER_DRAG_ITEM_SECOND_SELECTOR = '[data-testid=order-drag-item-1]';
+const DRAG_ITEM_MAIN_SELECTOR_BASE = 'data-testid=drag-item-main';
+
 beforeEach(() => {
   cy.viewport(1920, 1080);
-  cy.visit('http://localhost:3000');
+  cy.visit('/');
 
   cy.fixture('user-response.json').then((response) => {
     cy.intercept('GET', AUTH_USER_URL, response);
@@ -14,54 +22,54 @@ beforeEach(() => {
 });
 describe('dnd is work', () => {
   it('should be dnd item-list to constructor', () => {
-    cy.get('[data-testid=drag-item-bun-0]')
+    cy.get(DRAG_ITEM_BUN_SELECTOR)
       .trigger('dragstart')
       .trigger('dragleave');
-    cy.get('.item-list')
+    cy.get(ITEM_LIST_SELECTOR)
       .trigger('dragenter')
       .trigger('dragover')
       .trigger('drop')
       .trigger('dragend');
 
-    cy.get('[data-testid=drag-item-main-1]')
+    cy.get(`[${DRAG_ITEM_MAIN_SELECTOR_BASE}-1]`)
       .trigger('dragstart')
       .trigger('dragleave');
-    cy.get('.item-list')
+    cy.get(ITEM_LIST_SELECTOR)
       .trigger('dragenter')
       .trigger('dragover')
       .trigger('drop')
       .trigger('dragend');
 
-    cy.get('.item-list').find('[data-testid=order-drag-item-0]');
+    cy.get(ITEM_LIST_SELECTOR).find(ORDER_DRAG_ITEM_FIRST_SELECTOR);
   });
 
   it('should be dnd into constructor', () => {
     cy.wrap([0, 1]).each((index) => {
-      cy.get(`[data-testid=drag-item-main-${index}]`)
+      cy.get(`[${DRAG_ITEM_MAIN_SELECTOR_BASE}-${index}]`)
         .trigger('dragstart')
         .trigger('dragleave');
-      cy.get('.item-list')
+      cy.get(ITEM_LIST_SELECTOR)
         .trigger('dragenter')
         .trigger('dragover')
         .trigger('drop')
         .trigger('dragend');
     });
 
-    cy.get('.item-list [data-testid=order-drag-item-0]')
+    cy.get(ORDER_DRAG_ITEM_FIRST_SELECTOR)
       .invoke('text')
       .then((text) => {
         const firstElementTitle = text;
 
-        cy.get('.item-list [data-testid=order-drag-item-1]')
+        cy.get(ORDER_DRAG_ITEM_SECOND_SELECTOR)
           .trigger('dragstart')
           .trigger('dragleave');
-        cy.get('.item-list [data-testid=order-drag-item-0]')
+        cy.get(ORDER_DRAG_ITEM_FIRST_SELECTOR)
           .trigger('dragenter')
           .trigger('dragover')
           .trigger('drop')
           .trigger('dragend');
 
-        cy.get('.item-list [data-testid=order-drag-item-1]')
+        cy.get(ORDER_DRAG_ITEM_SECOND_SELECTOR)
           .invoke('text')
           .then(text => {
             expect(text).to.include(firstElementTitle);
@@ -72,16 +80,14 @@ describe('dnd is work', () => {
 
 describe('modal is work', () => {
   it('should be modal open', () => {
-    const selector = '[data-testid=drag-item-bun-0]';
-
-    cy.get(`${selector} p`)
+    cy.get(`${DRAG_ITEM_BUN_SELECTOR} p`)
       .invoke('text')
       .then((text) => {
         const modalText = text;
 
-        cy.get(selector).click();
+        cy.get(DRAG_ITEM_BUN_SELECTOR).click();
 
-        cy.get('#modal-root [data-testid=ingredient-details')
+        cy.get(INGREDIENT_DETAILS_SELECTOR)
           .invoke('text')
           .then((text) => {
             expect(text).to.include(modalText);
@@ -90,10 +96,10 @@ describe('modal is work', () => {
   });
 
   it('should be modal close', () => {
-    cy.get('[data-testid=drag-item-bun-0]').click();
-    cy.get('#modal-root [data-testid=ingredient-details');
-    cy.get('#modal-root [data-testid=modal-close] > svg').click();
-    cy.get('#modal-root [data-testid=ingredient-details').should('not.exist');
+    cy.get(DRAG_ITEM_BUN_SELECTOR).click();
+    cy.get(INGREDIENT_DETAILS_SELECTOR);
+    cy.get(`${MODAL_ROOT_SELECTOR} [data-testid=modal-close] > svg`).click();
+    cy.get(INGREDIENT_DETAILS_SELECTOR).should('not.exist');
   });
 });
 
@@ -111,7 +117,7 @@ describe('order process is work', () => {
       cy.get(`[data-testid=drag-item-${item[0]}-${item[1]}]`)
         .trigger('dragstart')
         .trigger('dragleave');
-      cy.get('.item-list')
+      cy.get(ITEM_LIST_SELECTOR)
         .trigger('dragenter')
         .trigger('dragover')
         .trigger('drop')
@@ -124,7 +130,7 @@ describe('order process is work', () => {
 
       cy.get('[data-testid=order-form] button').click();
 
-      cy.get('#modal-root [data-testid=order-details-number').invoke('text').then((text) => {
+      cy.get(`${MODAL_ROOT_SELECTOR} [data-testid=order-details-number`).invoke('text').then((text) => {
         expect(text).to.include(order.number);
       });
     });
