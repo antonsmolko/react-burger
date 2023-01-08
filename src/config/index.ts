@@ -1,5 +1,5 @@
 const BASE_DOMAIN = 'norma.nomoreparties.space';
-const API_BASE_URL = `https:/${BASE_DOMAIN}/api`;
+const API_BASE_URL = `https://${BASE_DOMAIN}/api`;
 const WS_BASE_URL = `wss://${BASE_DOMAIN}`;
 export const API_INGREDIENTS_URL = `${API_BASE_URL}/ingredients`;
 export const API_ORDERS_URL = `${API_BASE_URL}/orders`;

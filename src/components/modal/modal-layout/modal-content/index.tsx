@@ -18,7 +18,11 @@ const ModalContent: FC<IModalContent> = ({ animationIn, title, onClose, children
       unmountOnExit
       classNames={animationStyles}
     >
-      <div ref={contentRef} className={`${contentStyles.content} pl-10 pr-10 pt-10 pb-15`}>
+      <div
+        ref={contentRef}
+        className={`${contentStyles.content} pl-10 pr-10 pt-10 pb-15`}
+        data-testid="modal-content"
+      >
         <ModalHeader onClose={onClose}>{title}</ModalHeader>
         <div className={contentStyles.container}>
           {children}

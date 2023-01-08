@@ -4,14 +4,17 @@ import {
   TApiCheckResponse,
   TApiGenOptions,
   TApiGenPostOptions,
-  TApiGetPostOptions, TApiRequestApi,
+  TApiGetPostOptions,
+  TApiRequestApi
 } from '../services/types';
 
 const headers = {
   'Content-Type': 'application/json'
 };
 
-const checkResponse: TApiCheckResponse = (res) => res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+const checkResponse: TApiCheckResponse = (res) => res.ok
+  ? res.json()
+  : res.json().then((err) => Promise.reject(err));
 
 const genOptions: TApiGenOptions = (options) => ({ headers, ...options });
 

@@ -37,7 +37,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "./node_modules/.bin/cypress open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +49,7 @@
       "plugin:@typescript-eslint/recommended"
     ]
   },
+  "homepage": "https://antonsmolko.github.io/react-burger",
   "ts-standard": {
     "project": "./tsconfig.json"
   },
@@ -64,9 +68,12 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.38.1",
+    "cypress": "^12.1.0",
     "eslint": "^8.28.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^4.0.0",
     "sass": "^1.55.0"
   }
 }

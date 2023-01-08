@@ -10,7 +10,7 @@ const IngredientDetails: FC = () => {
 
   return ingredient
     ? (
-      <div>
+      <div data-testid="ingredient-details">
         <div className={styles.image}>
           <img src={ingredient.image_large} alt={ingredient.name} />
         </div>

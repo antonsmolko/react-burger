@@ -3,15 +3,15 @@ import {
   REMOVE_CONSTRUCTOR_INGREDIENT,
   RESET_CONSTRUCTOR_INGREDIENTS,
   UPDATE_CONSTRUCTOR_INGREDIENTS
-} from '../constants/constructor';
-import { TConstructorIngredients } from '../types';
-import { TConstructorActions } from '../actions';
+} from '../../constants/constructor';
+import { TConstructorIngredients } from '../../types';
+import { TConstructorActions } from '../../actions';
 
 type TConstructorState = {
   items: TConstructorIngredients;
 }
 
-const initialState: TConstructorState = {
+export const initialState: TConstructorState = {
   items: {
     bun: null,
     rest: []

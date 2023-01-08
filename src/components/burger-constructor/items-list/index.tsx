@@ -5,7 +5,11 @@ import styles from '../styles.module.scss';
 import { updateConstructorIngredients } from '../../../services/actions';
 import DragItem from '../drag-item';
 
-import {IConstructorItemsList, TConstructorDragIngredient, TConstructorMoveItem} from '../../../services/types';
+import {
+  IConstructorItemsList,
+  TConstructorDragIngredient,
+  TConstructorMoveItem
+} from '../../../services/types';
 
 const ItemsList: FC<IConstructorItemsList> = ({ ingredients }) => {
   const { bun, rest } = ingredients;

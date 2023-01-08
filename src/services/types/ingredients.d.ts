@@ -3,6 +3,7 @@ import { TIngredient } from './common';
 
 export interface IIngredientItem {
   item: TIngredient;
+  index: number;
   qty: number;
 }
 

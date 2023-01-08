@@ -1,13 +1,13 @@
-import { IOrder } from '../types';
-import { TWsFeedActions } from '../actions';
+import { IOrder } from '../../types';
+import { TWsFeedActions } from '../../actions';
 
 import {
   WS_FEED_CLOSE,
   WS_FEED_ERROR,
   WS_FEED_MESSAGE,
   WS_FEED_OPEN
-} from '../constants/ws-feed';
-import { WsConnectionStatus } from '../enums';
+} from '../../constants/ws-feed';
+import { WsConnectionStatus } from '../../enums';
 
 type TWsState = {
   connectionError: string;
@@ -17,7 +17,7 @@ type TWsState = {
   connectionStatus: WsConnectionStatus,
 }
 
-const initialState: TWsState = {
+export const initialState: TWsState = {
   connectionError: '',
   orders: [],
   total: 0,

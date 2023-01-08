@@ -20,9 +20,9 @@ import {
   UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILED,
-} from '../constants/auth';
-import { TUser } from '../types';
-import { TAuthActions } from '../actions';
+} from '../../constants/auth';
+import { TUser } from '../../types';
+import { TAuthActions } from '../../actions';
 
 export type TAuthState = {
   ready: boolean;
@@ -43,7 +43,7 @@ export type TAuthState = {
   updateUserRequest: boolean;
   updateUserFailed: boolean ;};
 
-const initialState: TAuthState = {
+export const initialState: TAuthState = {
   ready: false,
   user: {
     email: '',

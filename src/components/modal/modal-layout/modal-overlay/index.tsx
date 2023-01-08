@@ -18,7 +18,12 @@ const ModalOverlay: FC<IModalOverlay> = ({ onClose, animationIn = false }) => {
       unmountOnExit
       classNames={animationStyles}
     >
-      <div ref={backDropRef} className={styles.overlay} onClick={onClose}/>
+      <div
+        ref={backDropRef}
+        className={styles.overlay}
+        onClick={onClose}
+        data-testid="modal-overlay"
+      />
     </CSSTransition>
   );
 };

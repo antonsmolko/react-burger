@@ -26,7 +26,7 @@ const Footer: FC<IConstructorFooter> = ({ onCheckout, items, loading = false }) 
         <span className="text text_type_digits-medium">{price}</span>
         <CurrencyIcon type="primary" />
       </div>
-      <form>
+      <form data-testid="order-form">
         <Button
           htmlType="submit"
           type="primary"

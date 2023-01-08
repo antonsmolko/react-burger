@@ -35,10 +35,6 @@ export interface IConstructorDragItem {
   index: number;
 }
 
-export type TConstructorIngredient = TIngredient & {
-  id: string;
-};
-
 export type TDragItem = {
   ingredient: TConstructorIngredient;
   index: number;

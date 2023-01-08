@@ -9,6 +9,9 @@ parserOptions:
   sourceType: module
 extends:
   - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:cypress/recommended'
+plugins:
+  - cypress
 rules:
   indent:
     - error
@@ -32,4 +35,5 @@ rules:
   max-len:
     - error
     - code: 120
+  jest/expect-expect: off
 

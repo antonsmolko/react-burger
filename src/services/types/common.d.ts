@@ -6,7 +6,6 @@ export type TIngredient = {
   image: string;
   image_mobile: string;
   image_large: string;
-  index: number;
   calories: number;
   fat: number;
   proteins: number;

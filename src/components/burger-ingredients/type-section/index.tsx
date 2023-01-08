@@ -11,7 +11,9 @@ const TypeSection = forwardRef<HTMLDivElement, IIngredientsTypeSection>(({ title
     <section ref={ref} className="pt-10">
       <span className="text text_type_main-medium">{title}</span>
       <div className={styles.items}>
-        {items.map((item) => <Item item={item} qty={qtyMap[item._id]} key={item._id} />)}
+        {items.map((item, index) => (
+          <Item item={item} qty={qtyMap[item._id]} key={item._id} index={index} />
+        ))}
       </div>
     </section>
   );

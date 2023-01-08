@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 const ModalHeader: FC<IModalHeader> = ({ children, onClose }) => (
   <div className={styles.header}>
     {children && <span className="text text_type_main-large">{children}</span>}
-    <div className={styles.close}>
+    <div className={styles.close} data-testid="modal-close">
       <CloseIcon type="primary" onClick={onClose} />
     </div>
   </div>
