@@ -1,0 +1,111 @@
+@import "./scss";
+
+body, #root {
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1240px;
+  padding: 0 map-get($spacers, 5);
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#modal-root {
+  z-index: $modal-root-z-index;
+}
+
+/** Flex
+==================================================== */
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-end {
+  justify-content: end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+/** Height
+==================================================== */
+.h-inherit {
+  height: inherit;
+}
+
+.h-full {
+  height: 100%;
+}
+
+/** Typography
+==================================================== */
+.text-center {
+  text-align: center;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+/** Overflow
+==================================================== */
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+/** Scroll
+==================================================== */
+.custom-scroll {
+  overflow-y: scroll;
+  height: inherit;
+}
+
+/** Content
+==================================================== */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  height: inherit;
+
+  > section {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    box-sizing: border-box;
+  }
+}
+
+/** Spacers
+==================================================== */
+.ml-auto {
+  margin-left: auto;
+}

@@ -1,0 +1,7 @@
+@import '../../scss';
+
+.card {
+  background: var(--background);
+  border-radius: var(--common-border-radius-s);
+  padding: map-get($spacers, 6);
+}
