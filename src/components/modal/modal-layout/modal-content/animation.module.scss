@@ -1,0 +1,21 @@
+.enter {
+  opacity: 0;
+  transform: perspective(1000px) rotateX(15deg);
+}
+
+.enterActive {
+  transition: opacity .1s ease-out .2s, transform 0.1s ease-out .2s;
+  opacity: 1;
+  transform: rotateX(0);
+}
+
+.exit {
+  opacity: 1;
+  transform: rotateX(0);
+}
+
+.exitActive {
+  opacity: 0;
+  transform: perspective(1000px) rotateX(15deg);
+  transition: opacity .3s ease-out, transform .3s ease-out;
+}

@@ -1,0 +1,7 @@
+@import "../../scss";
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: map-get($spacers, 4);
+}

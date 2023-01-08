@@ -1,0 +1,8 @@
+@import "../../scss";
+
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  max-height: 366px;
+  gap: map-get($spacers, 4);
+}

@@ -1,0 +1,21 @@
+@import "../../scss/index";
+
+@mixin previews-z-index($count: 6) {
+  @for $i from 1 through $count {
+    &:nth-child(#{$count - $i}) {
+      z-index: #{$i};
+    }
+  }
+}
+
+.previews {
+  display: flex;
+
+  > div {
+    &:not(:first-child) {
+      margin-left: - map-get($spacers, 4);
+    }
+
+    @include previews-z-index;
+  }
+}
